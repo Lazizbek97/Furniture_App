@@ -59,8 +59,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+    - assets/images/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -74,29 +74,30 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  fonts:
-    - family: NunitoSans
-      fonts:
-        - asset: fonts/nunito/NunitoSans-Black.ttf
-        - asset: fonts/nunito/NunitoSans-Bold.ttf
-        - asset: fonts/nunito/NunitoSans-ExtraBold.ttf
-        - asset: fonts/nunito/NunitoSans-ExtraLight.ttf
-        - asset: fonts/nunito/NunitoSans-Light.ttf
-        - asset: fonts/nunito/NunitoSans-Italic.ttf
-        - asset: fonts/nunito/NunitoSans-Regular.ttf
-        - asset: fonts/nunito/NunitoSans-Semibold.ttf
-    - family: Merriweather
-      fonts:
-        - asset: fonts/Merriweather/Merriweather-Black.ttf
-        - asset: fonts/Merriweather/Merriweather-Bold.ttf
-        - asset: fonts/Merriweather/Merriweather-Light.ttf
-        - asset: fonts/Merriweather/Merriweather-Regular.ttf
-    - family: Gelasio
-      fonts:
-        - asset: fonts/Gelasio/Gelasio-Bold.ttf
-        - asset: fonts/Gelasio/Gelasio-Medium.ttf
-        - asset: fonts/Gelasio/Gelasio-Regular.ttf
-        - asset: fonts/Gelasio/Gelasio-SemiBold.ttf        
+  # TODO DELETE FONT FAMILIES, WE DON'T USE IT
+  # fonts:
+  #   - family: NunitoSans
+  #     fonts:
+  #       - asset: assets/fonts/nunito/NunitoSans-Black.ttf
+  #       - asset: assets/fonts/nunito/NunitoSans-Bold.ttf
+  #       - asset: assets/fonts/nunito/NunitoSans-ExtraBold.ttf
+  #       - asset: assets/fonts/nunito/NunitoSans-ExtraLight.ttf
+  #       - asset: assets/fonts/nunito/NunitoSans-Light.ttf
+  #       - asset: assets/fonts/nunito/NunitoSans-Italic.ttf
+  #       - asset: assets/fonts/nunito/NunitoSans-Regular.ttf
+  #       - asset: assets/fonts/nunito/NunitoSans-SemiBold.ttf
+  #   - family: Merriweather
+  #     fonts:
+  #       - asset: assets/fonts/Merriweather/Merriweather-Black.ttf
+  #       - asset: assets/fonts/Merriweather/Merriweather-Bold.ttf
+  #       - asset: assets/fonts/Merriweather/Merriweather-Light.ttf
+  #       - asset: assets/fonts/Merriweather/Merriweather-Regular.ttf
+  #   - family: Gelasio
+  #     fonts:
+  #       - asset: assets/fonts/Gelasio/Gelasio-Bold.ttf
+  #       - asset: assets/fonts/Gelasio/Gelasio-Medium.ttf
+  #       - asset: assets/fonts/Gelasio/Gelasio-Regular.ttf
+  #       - asset: assets/fonts/Gelasio/Gelasio-SemiBold.ttf        
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

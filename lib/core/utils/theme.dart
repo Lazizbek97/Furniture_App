@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class MainTheme {
   static Color whiteColor = const Color(0xffFFFFFF);
@@ -7,7 +8,7 @@ class MainTheme {
   static ThemeData light = ThemeData(
     // ? FontFamily
 
-    fontFamily: "NunitoSans",
+    fontFamily: GoogleFonts.nunito().fontFamily,
 
     // ? Elevated Buttons Style
 
@@ -27,7 +28,7 @@ class MainTheme {
       foregroundColor: blackColor,
       backgroundColor: whiteColor,
       elevation: 0,
-      titleTextStyle: const TextStyle(fontFamily: "Gelasio"),
+      titleTextStyle: GoogleFonts.gelasio(color: blackColor),
     ),
 
     // ? Scaffold background Color
