@@ -49,7 +49,8 @@ class HomePage extends StatelessWidget {
                       ],
                     ),
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () =>
+                          Navigator.pushReplacementNamed(context, "/cart_page"),
                       icon: SvgPicture.asset(
                         Constants.cartImage,
                       ),
@@ -66,7 +67,7 @@ class HomePage extends StatelessWidget {
                   itemBuilder: ((context, index) => const MenuButtons()),
                 ),
               ),
-               SizedBox(height: getHeight(10)),
+              SizedBox(height: getHeight(10)),
               Expanded(
                 child: GridView.builder(
                   itemCount: 10,
