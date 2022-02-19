@@ -12,9 +12,7 @@ class SignUpPage extends StatelessWidget {
 
   final TextEditingController _nameConstroller = TextEditingController();
   final TextEditingController _emailConstroller = TextEditingController();
-
   final TextEditingController _passwordConstroller = TextEditingController();
-
   final TextEditingController _confirmPasswordConstroller =
       TextEditingController();
 
@@ -22,7 +20,7 @@ class SignUpPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Container(
+        child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -74,14 +72,16 @@ class SignUpPage extends StatelessWidget {
                         passwordConstroller: _passwordConstroller,
                         hintText: "Password"),
                     PasswordInput(
-                        passwordConstroller: _confirmPasswordConstroller,
-                        hintText: "Confirm Password"),
+                      passwordConstroller: _confirmPasswordConstroller,
+                      hintText: "Confirm Password",
+                    ),
                     SizedBox(
                       height: getHeight(50),
                       width: getWidth(285),
                       child: ElevatedButton(
-                        onPressed: () {},
-                        child: const Text("Log in"),
+                        onPressed: () => Navigator.pushNamedAndRemoveUntil(
+                            context, "/home_page", (route) => false),
+                        child: const Text("SIGN UP"),
                       ),
                     ),
                     Row(
@@ -96,7 +96,7 @@ class SignUpPage extends StatelessWidget {
                           ),
                         ),
                         TextButton(
-                          onPressed: () {},
+                          onPressed: () => Navigator.pop(context),
                           child: Text(
                             "SIGN IN",
                             style: TextStyle(
