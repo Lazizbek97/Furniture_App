@@ -122,16 +122,20 @@ class AboutPage extends StatelessWidget {
                             children: [
                               SvgPicture.asset("assets/images/ystar.svg"),
                               Text(
-                                "  4.5",
+                                "  4.5  ",
                                 style: TextStyle(
                                     fontSize: 18, fontWeight: Constants.bold),
                               ),
                               TextButton(
-                                  onPressed: () {},
-                                  child: Text(
-                                    "  (50 reviews)",
-                                    style: TextStyle(color: Constants.color30),
-                                  ))
+                                onPressed: () => Navigator.pushNamed(
+                                    context, "/review_ratings"),
+                                child: Text(
+                                  "(50 reviews)",
+                                  style: TextStyle(
+                                      color: Constants.color30,
+                                      decoration: TextDecoration.underline),
+                                ),
+                              ),
                             ],
                           )
                         ],

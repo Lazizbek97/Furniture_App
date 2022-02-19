@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:furniture_app/core/utils/size_config.dart';
 
-import '../../screens/presentations/about_page.dart/components/plus_minus_item.dart';
-import 'constants.dart';
+import '../../about_page.dart/components/plus_minus_item.dart';
+import '../../../../core/utils/constants.dart';
 
 class A_Cart extends StatelessWidget {
   const A_Cart({
@@ -78,5 +78,6 @@ class A_Cart extends StatelessWidget {
         ],
       ),
     );
+  
   }
 }

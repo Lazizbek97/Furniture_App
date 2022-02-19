@@ -3,7 +3,8 @@ import 'package:furniture_app/core/utils/constants.dart';
 import 'package:furniture_app/core/utils/size_config.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../core/utils/a_cart.dart';
+import 'components/a_cart.dart';
+import 'components/promocode.dart';
 
 class CartPage extends StatelessWidget {
   const CartPage({Key? key}) : super(key: key);
@@ -13,7 +14,7 @@ class CartPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          onPressed: () =>Navigator.pop(context),
+          onPressed: () => Navigator.pop(context),
           icon: const Icon(
             Icons.arrow_back_ios,
             size: 20,
@@ -30,7 +31,7 @@ class CartPage extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Container(
-          height:  getHeight(700),
+          height: getHeight(700),
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -73,49 +74,11 @@ class CartPage extends StatelessWidget {
                 height: getHeight(60),
                 width: getWidth(335),
                 child: ElevatedButton(
-                    onPressed: () {}, child: const Text("Check out")),
+                    onPressed: () =>
+                        Navigator.pushNamed(context, '/checkout_page'),
+                    child: const Text("Check out")),
               )
             ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class PromoCodeEntry extends StatelessWidget {
-  const PromoCodeEntry({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: getHeight(44),
-      width: getWidth(335),
-      child: TextFormField(
-        decoration: InputDecoration(
-          labelText: "Enter your promo code",
-          contentPadding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(15),
-          ),
-          suffixIcon: InkWell(
-            onTap: () {
-              
-            },
-            child: Container(
-              height: getHeight(44),
-              width: getHeight(44),
-              decoration: BoxDecoration(
-                color: Colors.black,
-                borderRadius: BorderRadius.circular(15),
-              ),
-              child: const Icon(
-                Icons.arrow_forward_ios_sharp,
-                color: Colors.white,
-              ),
-            ),
           ),
         ),
       ),
