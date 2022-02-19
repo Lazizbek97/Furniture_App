@@ -8,7 +8,7 @@ class MainTheme {
   static ThemeData light = ThemeData(
     // ? FontFamily
 
-    fontFamily: GoogleFonts.nunito().fontFamily,
+    fontFamily: GoogleFonts.nunitoSans().fontFamily,
 
     // ? Elevated Buttons Style
 

@@ -31,7 +31,7 @@ class Boarding extends StatelessWidget {
                     "Make Your",
                     style: GoogleFonts.gelasio(
                         fontSize: Constants.boardingTitle2,
-                        color: Constants.discTextColor,
+                        color: Constants.color60,
                         fontWeight: Constants.semiBold),
                   ),
                   SizedBox(
@@ -58,7 +58,7 @@ class Boarding extends StatelessWidget {
               child: Text(
                 "The best simple place where you discover most wonderful furnitures and make your home beautiful",
                 style: GoogleFonts.nunitoSans(
-                  color: Constants.subtitleTextColor,
+                  color: Constants.color80,
                   fontSize: 18,
                 ),
               ),
@@ -70,7 +70,8 @@ class Boarding extends StatelessWidget {
                   height: getHeight(54),
                   width: getWidth(159),
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () =>
+                        Navigator.pushReplacementNamed(context, "/signIn"),
                     child: const Text("Get Sarted"),
                     style: ElevatedButton.styleFrom(),
                   ),

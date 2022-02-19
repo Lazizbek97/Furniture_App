@@ -3,17 +3,30 @@ import 'package:flutter/material.dart';
 class Constants {
   // Font Family
   // Colors
-  static Color subtitleTextColor = const Color(0xff808080);
-  static Color discTextColor = const Color(0xff606060);
+  static Color color80 = const Color(0xff808080);
+  static Color color60 = const Color(0xff606060);
+  static Color color30 = const Color(0xff303030);
+  static Color color90 = const Color(0xff909090);
+
+  static Color dividerColor = const Color(0xffBDBDBD);
+  static Color inputBorderColor = const Color(0xffE0E0E0);
+
 
   // Sizes
   static double boardingTitle1 = 30;
   static double boardingTitle2 = 24;
+  static double disTextSize = 14;
+
+  
   // FontWeight
   static FontWeight semiBold = FontWeight.w600;
   static FontWeight bold = FontWeight.w700;
+  static FontWeight regular = FontWeight.w400;
+
 
   // Images
   static String boardingImage = 'assets/images/boarding.png';
+  static String sofaImage = 'assets/images/sofa.svg';
+
   // BorderRadius
 }
