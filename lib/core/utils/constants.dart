@@ -1,3 +1,6 @@
-class Constants{
-  
+class Constants {
+  // Font Family
+  // Colors
+  // Sizes
+  // BorderRadius
 }
