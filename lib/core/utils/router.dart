@@ -7,6 +7,7 @@ import 'package:furniture_app/screens/presentations/completed_payment/payment_co
 import 'package:furniture_app/screens/presentations/favorites_page/favorites.dart';
 import 'package:furniture_app/screens/presentations/home_page/home_page.dart';
 import 'package:furniture_app/screens/presentations/my_orders_page/my_orders.dart';
+import 'package:furniture_app/screens/presentations/payment_methods_page/payment_methods.dart';
 import 'package:furniture_app/screens/presentations/rating_reviews/rating_reviews.dart';
 import 'package:furniture_app/screens/presentations/shipping_address_page/shipping_address.dart';
 
@@ -41,6 +42,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const MyOrdersPage());
       case '/shipping_address':
         return MaterialPageRoute(builder: (_) => const ShippingAddressPage());
+      case '/payment_methods':
+        return MaterialPageRoute(builder: (_) => const PaymentMethods());
     }
     return null;
   }

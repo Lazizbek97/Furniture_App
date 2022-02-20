@@ -84,7 +84,7 @@ class AccountPage extends StatelessWidget {
               ),
             ),
             InkWell(
-              onTap: () {},
+              onTap: () => Navigator.pushNamed(context, "/payment_methods"),
               child: const AccoutPageMenus(
                 title: "Payment Method",
                 subtitle: "You have 2 cards",
