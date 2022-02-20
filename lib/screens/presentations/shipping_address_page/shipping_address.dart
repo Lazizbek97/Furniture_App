@@ -48,10 +48,8 @@ class ShippingAddressPage extends StatelessWidget {
                             value: true,
                             checkColor: Colors.white,
                             activeColor: Constants.color30,
-                            
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(5)
-                            ),
+                                borderRadius: BorderRadius.circular(5)),
                             onChanged: (v) {},
                           ),
                           Text(
@@ -115,7 +113,7 @@ class ShippingAddressPage extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () => Navigator.pushNamed(context, "/adding_address"),
         child: const Icon(
           Icons.add,
           size: 30,

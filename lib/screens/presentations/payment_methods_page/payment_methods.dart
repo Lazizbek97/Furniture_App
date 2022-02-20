@@ -70,6 +70,8 @@ class PaymentMethods extends StatelessWidget {
                       bottom: getHeight(20),
                       left: getWidth(31),
                       child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+
                         children: [
                           const Text(
                             "Card Holder Name ",
@@ -92,6 +94,8 @@ class PaymentMethods extends StatelessWidget {
                       bottom: getHeight(20),
                       right: getWidth(31),
                       child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+
                         children: [
                           const Text(
                             "Expiry Date",
@@ -113,6 +117,7 @@ class PaymentMethods extends StatelessWidget {
                   ],
                 ),
               ),
+             
               Row(
                 children: [
                   SizedBox(
@@ -135,7 +140,7 @@ class PaymentMethods extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () => Navigator.pushNamed(context, "/adding_payment_method"),
         child: const Icon(
           Icons.add,
           size: 30,

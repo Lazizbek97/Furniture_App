@@ -91,14 +91,14 @@ class AccountPage extends StatelessWidget {
               ),
             ),
             InkWell(
-              onTap: () {},
+              onTap: () => Navigator.pushNamed(context, "/my_reviews"),
               child: const AccoutPageMenus(
                 title: "My reviews",
                 subtitle: "Reviews for 5 items",
               ),
             ),
             InkWell(
-              onTap: () {},
+              onTap: () => Navigator.pushNamed(context, "/settings_page"),
               child: const AccoutPageMenus(
                 title: "Settings",
                 subtitle: "Notification, Password, FAQ, Contact",
