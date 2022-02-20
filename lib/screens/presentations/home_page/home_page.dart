@@ -3,107 +3,157 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:furniture_app/core/utils/constants.dart';
 import 'package:furniture_app/core/utils/size_config.dart';
+import 'package:furniture_app/screens/presentations/account_page/account_page.dart';
+import 'package:furniture_app/screens/presentations/favorites_page/favorites.dart';
+import 'package:furniture_app/screens/presentations/notifications_page/notifications_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'components/item_card.dart';
 import 'components/menu_button.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  late int _navbarIndex = 0;
+
+  final List _pages = [
+    const HomePageBody(),
+    const FavoritesPage(),
+    const NotificationsPage(),
+    const AccountPage()
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: Column(
-            children: [
-              Container(
-                margin: const EdgeInsets.symmetric(vertical: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    IconButton(
-                      onPressed: () {},
-                      icon: SvgPicture.asset(
-                        Constants.searchImage,
-                      ),
-                    ),
-                    Column(
-                      children: [
-                        Text(
-                          "Make home",
-                          style: GoogleFonts.gelasio(
-                            fontSize: 18,
-                            color: Constants.color90,
-                          ),
-                        ),
-                        Text(
-                          "BEAUTIFUL",
-                          style: GoogleFonts.gelasio(
-                            fontSize: 18,
-                            fontWeight: Constants.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                    IconButton(
-                      onPressed: () =>
-                          Navigator.pushReplacementNamed(context, "/cart_page"),
-                      icon: SvgPicture.asset(
-                        Constants.cartImage,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: getHeight(78),
-                width: double.infinity,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 10,
-                  itemBuilder: ((context, index) => const MenuButtons()),
-                ),
-              ),
-              SizedBox(height: getHeight(10)),
-              Expanded(
-                child: GridView.builder(
-                  itemCount: 10,
-                  gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                    maxCrossAxisExtent: 200,
-                    mainAxisExtent: 273,
-                    mainAxisSpacing: getWidth(20),
-                  ),
-                  itemBuilder: (__, _) => const ItemCard(),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
+      body: _pages[_navbarIndex],
       bottomNavigationBar: BottomNavigationBar(
           showSelectedLabels: false,
           showUnselectedLabels: false,
+          currentIndex: _navbarIndex,
+          onTap: (v) {
+            setState(() {
+              _navbarIndex = v;
+            });
+          },
           items: [
             BottomNavigationBarItem(
               label: "",
-              icon: SvgPicture.asset("assets/images/home.svg"),
+              icon: SvgPicture.asset(
+                _navbarIndex != 0
+                    ? "assets/images/home.svg"
+                    : "assets/images/home_filled.svg",
+              ),
             ),
             BottomNavigationBarItem(
               label: "",
-              icon: SvgPicture.asset("assets/images/bookmark.svg"),
+              icon: SvgPicture.asset(
+                _navbarIndex != 1
+                    ? "assets/images/bookmark.svg"
+                    : "assets/images/bookmark_filled.svg",
+              ),
             ),
             BottomNavigationBarItem(
               label: "",
-              icon: SvgPicture.asset("assets/images/bell.svg"),
+              icon: SvgPicture.asset(
+                _navbarIndex != 2
+                    ? "assets/images/bell.svg"
+                    : "assets/images/bell_filled.svg",
+              ),
             ),
             BottomNavigationBarItem(
               label: "",
-              icon: SvgPicture.asset("assets/images/person.svg"),
+              icon: SvgPicture.asset(
+                _navbarIndex != 3
+                    ? "assets/images/person.svg"
+                    : "assets/images/person_filled.svg",
+              ),
             ),
           ]),
+    );
+  }
+}
+
+class HomePageBody extends StatelessWidget {
+  const HomePageBody({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        child: Column(
+          children: [
+            Container(
+              margin: const EdgeInsets.symmetric(vertical: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  IconButton(
+                    onPressed: () {},
+                    icon: SvgPicture.asset(
+                      Constants.searchImage,
+                    ),
+                  ),
+                  Column(
+                    children: [
+                      Text(
+                        "Make home",
+                        style: GoogleFonts.gelasio(
+                          fontSize: 18,
+                          color: Constants.color90,
+                        ),
+                      ),
+                      Text(
+                        "BEAUTIFUL",
+                        style: GoogleFonts.gelasio(
+                          fontSize: 18,
+                          fontWeight: Constants.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                  IconButton(
+                    onPressed: () =>
+                        Navigator.pushReplacementNamed(context, "/cart_page"),
+                    icon: SvgPicture.asset(
+                      Constants.cartImage,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: getHeight(78),
+              width: double.infinity,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: 10,
+                itemBuilder: ((context, index) => const MenuButtons()),
+              ),
+            ),
+            SizedBox(height: getHeight(10)),
+            Expanded(
+              child: GridView.builder(
+                itemCount: 10,
+                gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                  maxCrossAxisExtent: 200,
+                  mainAxisExtent: 273,
+                  mainAxisSpacing: getWidth(20),
+                ),
+                itemBuilder: (__, _) => const ItemCard(),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
