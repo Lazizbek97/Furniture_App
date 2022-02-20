@@ -40,7 +40,9 @@ class FavoritesPage extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: ListView.separated(
           itemCount: 8,
-          separatorBuilder: (c,i)=>Divider(color: Constants.dividerColor,),
+          separatorBuilder: (c, i) => Divider(
+            color: Constants.dividerColor,
+          ),
           itemBuilder: (__, _) => Container(
             height: getHeight(100),
             width: double.infinity,
@@ -102,6 +104,18 @@ class FavoritesPage extends StatelessWidget {
                 )
               ],
             ),
+          ),
+        ),
+      ),
+      floatingActionButton: SizedBox(
+        height: getHeight(50),
+        width: getWidth(334),
+        child: FloatingActionButton(
+          onPressed: () {},
+          child: const Text("Add all to my cart"),
+          isExtended: true,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
           ),
         ),
       ),

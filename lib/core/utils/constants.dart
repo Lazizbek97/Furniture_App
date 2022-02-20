@@ -8,7 +8,7 @@ class Constants {
   static Color color30 = const Color(0xff303030);
   static Color color90 = const Color(0xff909090);
 
-  static Color dividerColor = const Color(0xffBDBDBD);
+  static Color dividerColor = const Color(0xff0fff0f0f0);
   static Color inputBorderColor = const Color(0xffE0E0E0);
 
   // Sizes

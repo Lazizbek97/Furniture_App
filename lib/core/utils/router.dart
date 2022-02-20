@@ -6,7 +6,9 @@ import 'package:furniture_app/screens/presentations/checkout_page/checkout_page.
 import 'package:furniture_app/screens/presentations/completed_payment/payment_completed.dart';
 import 'package:furniture_app/screens/presentations/favorites_page/favorites.dart';
 import 'package:furniture_app/screens/presentations/home_page/home_page.dart';
+import 'package:furniture_app/screens/presentations/my_orders_page/my_orders.dart';
 import 'package:furniture_app/screens/presentations/rating_reviews/rating_reviews.dart';
+import 'package:furniture_app/screens/presentations/shipping_address_page/shipping_address.dart';
 
 import '../../screens/presentations/sign_in_page/sign_in_page.dart';
 import '../../screens/presentations/sign_up_page/sing_up_page.dart';
@@ -22,7 +24,7 @@ class RouteGenerator {
       case '/signUp':
         return MaterialPageRoute(builder: (_) => SignUpPage());
       case '/home_page':
-        return MaterialPageRoute(builder: (_) => HomePage());
+        return MaterialPageRoute(builder: (_) => const HomePage());
       case '/about_page':
         return MaterialPageRoute(builder: (_) => const AboutPage());
       case '/cart_page':
@@ -35,6 +37,10 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const RatingReviews());
       case '/favorites_page':
         return MaterialPageRoute(builder: (_) => const FavoritesPage());
+      case '/myorders':
+        return MaterialPageRoute(builder: (_) => const MyOrdersPage());
+      case '/shipping_address':
+        return MaterialPageRoute(builder: (_) => const ShippingAddressPage());
     }
     return null;
   }
