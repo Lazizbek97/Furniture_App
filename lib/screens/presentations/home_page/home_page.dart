@@ -6,8 +6,12 @@ import 'package:furniture_app/core/utils/size_config.dart';
 import 'package:furniture_app/screens/presentations/account_page/account_page.dart';
 import 'package:furniture_app/screens/presentations/favorites_page/favorites.dart';
 import 'package:furniture_app/screens/presentations/notifications_page/notifications_page.dart';
+import 'package:furniture_app/screens/providers/furniture_provider/furniture_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive/hive.dart';
+import 'package:provider/provider.dart';
 
+import '../../../core/models/furniture_model.dart';
 import 'components/item_card.dart';
 import 'components/menu_button.dart';
 
@@ -86,6 +90,9 @@ class HomePageBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var mebels = context.watch<Box<FurnitureModel>>().values;
+    var home = context.watch<HomePageProvider>();
+
     return SafeArea(
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -122,7 +129,7 @@ class HomePageBody extends StatelessWidget {
                   ),
                   IconButton(
                     onPressed: () =>
-                        Navigator.pushReplacementNamed(context, "/cart_page"),
+                        Navigator.pushNamed(context, "/cart_page"),
                     icon: SvgPicture.asset(
                       Constants.cartImage,
                     ),
@@ -135,20 +142,29 @@ class HomePageBody extends StatelessWidget {
               width: double.infinity,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: 10,
-                itemBuilder: ((context, index) => const MenuButtons()),
+                itemCount: mebels.length,
+                itemBuilder: ((context, index) => mebels.isEmpty
+                    ? const Center(
+                        child: CircularProgressIndicator.adaptive(),
+                      )
+                    : InkWell(
+                        onTap: () => home.changeMenu(index),
+                        child: MenuButtons(
+                          index: index,
+                        ),
+                      )),
               ),
             ),
             SizedBox(height: getHeight(10)),
             Expanded(
               child: GridView.builder(
-                itemCount: 10,
+                itemCount: mebels.toList()[home.menuIndex].items!.length,
                 gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                   maxCrossAxisExtent: 200,
                   mainAxisExtent: 273,
                   mainAxisSpacing: getWidth(20),
                 ),
-                itemBuilder: (__, _) => const ItemCard(),
+                itemBuilder: (__, _) =>  ItemCard(index: _),
               ),
             ),
           ],

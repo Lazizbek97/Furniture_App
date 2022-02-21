@@ -2,14 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:furniture_app/core/utils/size_config.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive/hive.dart';
+import 'package:provider/provider.dart';
 
+import '../../../core/models/furniture_model.dart';
 import '../../../core/utils/constants.dart';
+import '../../providers/furniture_provider/furniture_provider.dart';
 
 class RatingReviews extends StatelessWidget {
-  const RatingReviews({Key? key}) : super(key: key);
+  RatingReviews({Key? key, required this.index}) : super(key: key);
+
+  int index;
 
   @override
   Widget build(BuildContext context) {
+    var home = context.watch<HomePageProvider>();
+    var mebels = context
+        .watch<Box<FurnitureModel>>()
+        .values
+        .toList()[home.menuIndex]
+        .items![index];
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -48,9 +60,9 @@ class RatingReviews extends StatelessWidget {
                       margin: EdgeInsets.only(right: getWidth(20)),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15),
-                        image: const DecorationImage(
+                        image:  DecorationImage(
                           fit: BoxFit.cover,
-                          image: AssetImage("assets/images/minimalstand.png"),
+                          image: AssetImage(mebels.img![0].toString()),
                         ),
                       ),
                     ),
@@ -59,7 +71,7 @@ class RatingReviews extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Minimal Stand",
+                          mebels.name.toString(),
                           style: TextStyle(
                             color: Constants.color60,
                           ),
@@ -68,14 +80,14 @@ class RatingReviews extends StatelessWidget {
                           children: [
                             SvgPicture.asset("assets/images/ystar.svg"),
                             Text(
-                              "  4.5",
+                              "  ${mebels.ratings}",
                               style: TextStyle(
                                   fontSize: 24, fontWeight: Constants.bold),
                             ),
                           ],
                         ),
                         Text(
-                          "10 reviews",
+                          "${mebels.reviews!.length} reviews",
                           style: TextStyle(
                             fontWeight: FontWeight.w600,
                             fontSize: 18,
@@ -88,10 +100,9 @@ class RatingReviews extends StatelessWidget {
                 ),
               ),
             ),
-            
             Expanded(
               child: ListView.builder(
-                itemCount: 10,
+                itemCount: mebels.reviews!.length,
                 itemBuilder: (__, _) => Stack(
                   children: [
                     Container(
@@ -141,10 +152,9 @@ class RatingReviews extends StatelessWidget {
                               ],
                             ),
                           ),
-                          const Expanded(
+                           Expanded(
                             flex: 8,
-                            child: Text(
-                                "Nice Furniture with good delivery. The delivery time is very fast. Then products look like exactly the picture in the app. Besides, color is also the same and quality is very good despite very cheap price"),
+                            child: Text(mebels.reviews![_]),
                           ),
                         ],
                       ),

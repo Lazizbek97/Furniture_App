@@ -1,17 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:furniture_app/core/utils/constants.dart';
+import 'package:hive/hive.dart';
+import 'package:provider/provider.dart';
 
+import '../../../../core/models/furniture_model.dart';
 import '../../../../core/utils/size_config.dart';
 
 import '../../../../core/widgets/barbutton.dart';
+import '../../../providers/furniture_provider/furniture_provider.dart';
 
 class ItemCard extends StatelessWidget {
-  const ItemCard({
+   ItemCard({
     Key? key,
+    required this.index
   }) : super(key: key);
+  int index;
 
   @override
   Widget build(BuildContext context) {
+    var mebels = context.watch<Box<FurnitureModel>>().values.toList();
+    var home = context.watch<HomePageProvider>();
     return Container(
       margin: EdgeInsets.symmetric(horizontal: getWidth(10)),
       width: getWidth(157),
@@ -19,7 +27,7 @@ class ItemCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
       ),
       child: InkWell(
-        onTap: () => Navigator.pushNamed(context, "/about_page"),
+        onTap: () => Navigator.pushNamed(context, "/about_page", arguments: index),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -30,9 +38,12 @@ class ItemCard extends StatelessWidget {
                     Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
-                        image: const DecorationImage(
+                        image: DecorationImage(
                           fit: BoxFit.cover,
-                          image: AssetImage("assets/images/black_lamp.png"),
+                          image: AssetImage(mebels[home.menuIndex]
+                              .items![index]
+                              .img![0]
+                              .toString()),
                         ),
                       ),
                     ),
@@ -40,9 +51,7 @@ class ItemCard extends StatelessWidget {
                       bottom: 10,
                       right: 10,
                       child: InkWell(
-                        onTap: () {
-                          print("bag button");
-                        },
+                        onTap: () {},
                         child: const BagButton(),
                       ),
                     ),
@@ -54,11 +63,11 @@ class ItemCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    "Black Simple Lamp",
+                  Text(
+                    mebels[home.menuIndex].items![index].name.toString(),
                   ),
                   Text(
-                    "\$ 12.00",
+                    "\$ ${mebels[home.menuIndex].items![index].price}",
                     style: TextStyle(
                         color: Constants.color30, fontWeight: Constants.bold),
                   ),

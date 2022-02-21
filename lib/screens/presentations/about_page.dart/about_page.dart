@@ -3,15 +3,27 @@ import 'package:flutter_svg/svg.dart';
 import 'package:furniture_app/core/utils/constants.dart';
 import 'package:furniture_app/core/utils/size_config.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive/hive.dart';
+import 'package:provider/provider.dart';
 
+import '../../../core/models/furniture_model.dart';
+import '../../providers/furniture_provider/furniture_provider.dart';
 import 'components/color_picker.dart';
 import 'components/plus_minus_item.dart';
 
 class AboutPage extends StatelessWidget {
-  const AboutPage({Key? key}) : super(key: key);
+  AboutPage({Key? key, required this.index}) : super(key: key);
+
+  int index;
 
   @override
   Widget build(BuildContext context) {
+    var home = context.watch<HomePageProvider>();
+    var mebels = context
+        .watch<Box<FurnitureModel>>()
+        .values
+        .toList()[home.menuIndex]
+        .items![index];
     return Scaffold(
       body: Column(
         children: [
@@ -22,13 +34,13 @@ class AboutPage extends StatelessWidget {
                 child: Container(
                   height: getHeight(455),
                   width: getWidth(323),
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     color: Colors.red,
-                    borderRadius:
-                        BorderRadius.only(bottomLeft: Radius.circular(50)),
+                    borderRadius: const BorderRadius.only(
+                        bottomLeft: Radius.circular(50)),
                     image: DecorationImage(
                       fit: BoxFit.cover,
-                      image: AssetImage("assets/images/minimalstand.png"),
+                      image: AssetImage(mebels.img![0].toString()),
                     ),
                   ),
                 ),
@@ -108,13 +120,13 @@ class AboutPage extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Minimal Stand",
+                            mebels.name.toString(),
                             style: GoogleFonts.gelasio(
                               fontSize: 24,
                             ),
                           ),
                           Text(
-                            "\$ 50",
+                            "\$ ${mebels.price}",
                             style: TextStyle(
                                 fontSize: 30, fontWeight: Constants.bold),
                           ),
@@ -122,15 +134,15 @@ class AboutPage extends StatelessWidget {
                             children: [
                               SvgPicture.asset("assets/images/ystar.svg"),
                               Text(
-                                "  4.5  ",
+                                "  ${mebels.ratings}  ",
                                 style: TextStyle(
                                     fontSize: 18, fontWeight: Constants.bold),
                               ),
                               TextButton(
                                 onPressed: () => Navigator.pushNamed(
-                                    context, "/review_ratings"),
+                                    context, "/review_ratings", arguments:  index),
                                 child: Text(
-                                  "(50 reviews)",
+                                  "(${mebels.reviews!.length} reviews)",
                                   style: TextStyle(
                                       color: Constants.color30,
                                       decoration: TextDecoration.underline),
@@ -170,7 +182,7 @@ class AboutPage extends StatelessWidget {
                   height: getHeight(100),
                   width: getWidth(325),
                   child: Text(
-                    "Minimal Stand is made of by natural wood. The design that is very simple and minimal. This is truly one of the best furnitures in any family for now. With 3 different colors, you can easily select the best match for your home. ",
+                    mebels.disc.toString(),
                     style: TextStyle(
                         color: Constants.color60, fontWeight: FontWeight.w300),
                   ),

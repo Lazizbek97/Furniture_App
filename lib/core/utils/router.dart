@@ -31,7 +31,7 @@ class RouteGenerator {
       case '/home_page':
         return MaterialPageRoute(builder: (_) => const HomePage());
       case '/about_page':
-        return MaterialPageRoute(builder: (_) => const AboutPage());
+        return MaterialPageRoute(builder: (_) => AboutPage(index: args as int));
       case '/cart_page':
         return MaterialPageRoute(builder: (_) => const CartPage());
       case '/checkout_page':
@@ -39,7 +39,10 @@ class RouteGenerator {
       case '/payment_completed':
         return MaterialPageRoute(builder: (_) => const PaymentCompleted());
       case '/review_ratings':
-        return MaterialPageRoute(builder: (_) => const RatingReviews());
+        return MaterialPageRoute(
+            builder: (_) => RatingReviews(
+                  index: args as int,
+                ));
       case '/favorites_page':
         return MaterialPageRoute(builder: (_) => const FavoritesPage());
       case '/myorders':
