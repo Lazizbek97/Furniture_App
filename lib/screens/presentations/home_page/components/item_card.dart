@@ -7,13 +7,10 @@ import '../../../../core/models/furniture_model.dart';
 import '../../../../core/utils/size_config.dart';
 
 import '../../../../core/widgets/barbutton.dart';
-import '../../../providers/furniture_provider/furniture_provider.dart';
+import '../../../providers/home_page_provider/homepage_provider.dart';
 
 class ItemCard extends StatelessWidget {
-   ItemCard({
-    Key? key,
-    required this.index
-  }) : super(key: key);
+  ItemCard({Key? key, required this.index}) : super(key: key);
   int index;
 
   @override
@@ -27,7 +24,8 @@ class ItemCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
       ),
       child: InkWell(
-        onTap: () => Navigator.pushNamed(context, "/about_page", arguments: index),
+        onTap: () =>
+            Navigator.pushNamed(context, "/about_page", arguments: index),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

@@ -32,7 +32,7 @@ class CartPage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Container(
           height: getHeight(700),
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [

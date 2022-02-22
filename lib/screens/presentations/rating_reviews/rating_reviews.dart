@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 
 import '../../../core/models/furniture_model.dart';
 import '../../../core/utils/constants.dart';
-import '../../providers/furniture_provider/furniture_provider.dart';
+import '../../providers/home_page_provider/homepage_provider.dart';
 
 class RatingReviews extends StatelessWidget {
   RatingReviews({Key? key, required this.index}) : super(key: key);
@@ -60,7 +60,7 @@ class RatingReviews extends StatelessWidget {
                       margin: EdgeInsets.only(right: getWidth(20)),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15),
-                        image:  DecorationImage(
+                        image: DecorationImage(
                           fit: BoxFit.cover,
                           image: AssetImage(mebels.img![0].toString()),
                         ),
@@ -132,7 +132,7 @@ class RatingReviews extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      "Lazizbek Fayziev",
+                                      mebels.reviews![_].name.toString(),
                                       style: TextStyle(
                                           fontWeight: Constants.semiBold),
                                     ),
@@ -145,16 +145,16 @@ class RatingReviews extends StatelessWidget {
                                   ],
                                 ),
                                 Text(
-                                  "10/01/2020",
+                                  mebels.reviews![_].date.toString(),
                                   style: TextStyle(
                                       color: Constants.color80, fontSize: 12),
                                 )
                               ],
                             ),
                           ),
-                           Expanded(
+                          Expanded(
                             flex: 8,
-                            child: Text(mebels.reviews![_]),
+                            child: Text(mebels.reviews![_].comment.toString()),
                           ),
                         ],
                       ),
@@ -176,7 +176,9 @@ class RatingReviews extends StatelessWidget {
         height: getHeight(50),
         width: getWidth(334),
         child: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            print(mebels.reviews!.toList()[0].comment);
+          },
           child: const Text("Write a review"),
           isExtended: true,
           shape:

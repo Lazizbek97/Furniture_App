@@ -7,7 +7,7 @@ import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/models/furniture_model.dart';
-import '../../providers/furniture_provider/furniture_provider.dart';
+import '../../providers/home_page_provider/homepage_provider.dart';
 import 'components/color_picker.dart';
 import 'components/plus_minus_item.dart';
 
@@ -140,7 +140,8 @@ class AboutPage extends StatelessWidget {
                               ),
                               TextButton(
                                 onPressed: () => Navigator.pushNamed(
-                                    context, "/review_ratings", arguments:  index),
+                                    context, "/review_ratings",
+                                    arguments: index),
                                 child: Text(
                                   "(${mebels.reviews!.length} reviews)",
                                   style: TextStyle(

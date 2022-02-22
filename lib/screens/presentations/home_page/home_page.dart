@@ -12,6 +12,7 @@ import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/models/furniture_model.dart';
+import '../../providers/home_page_provider/homepage_provider.dart';
 import 'components/item_card.dart';
 import 'components/menu_button.dart';
 
@@ -92,6 +93,7 @@ class HomePageBody extends StatelessWidget {
   Widget build(BuildContext context) {
     var mebels = context.watch<Box<FurnitureModel>>().values;
     var home = context.watch<HomePageProvider>();
+    print(mebels.isEmpty);
 
     return SafeArea(
       child: Container(
@@ -128,8 +130,7 @@ class HomePageBody extends StatelessWidget {
                     ],
                   ),
                   IconButton(
-                    onPressed: () =>
-                        Navigator.pushNamed(context, "/cart_page"),
+                    onPressed: () => Navigator.pushNamed(context, "/cart_page"),
                     icon: SvgPicture.asset(
                       Constants.cartImage,
                     ),
@@ -142,10 +143,11 @@ class HomePageBody extends StatelessWidget {
               width: double.infinity,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: mebels.length,
+                itemCount: mebels.isNotEmpty ? mebels.length : 5,
                 itemBuilder: ((context, index) => mebels.isEmpty
                     ? const Center(
-                        child: CircularProgressIndicator.adaptive(),
+                        child:
+                            Center(child: CircularProgressIndicator.adaptive()),
                       )
                     : InkWell(
                         onTap: () => home.changeMenu(index),
@@ -158,13 +160,17 @@ class HomePageBody extends StatelessWidget {
             SizedBox(height: getHeight(10)),
             Expanded(
               child: GridView.builder(
-                itemCount: mebels.toList()[home.menuIndex].items!.length,
+                itemCount: mebels.isNotEmpty
+                    ? mebels.toList()[home.menuIndex].items!.length
+                    : 5,
                 gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                   maxCrossAxisExtent: 200,
                   mainAxisExtent: 273,
                   mainAxisSpacing: getWidth(20),
                 ),
-                itemBuilder: (__, _) =>  ItemCard(index: _),
+                itemBuilder: (__, _) => mebels.isNotEmpty
+                    ? ItemCard(index: _)
+                    : const Center(child: CircularProgressIndicator.adaptive()),
               ),
             ),
           ],

@@ -8,6 +8,7 @@ import '../../../../core/utils/size_config.dart';
 import 'package:furniture_app/core/utils/constants.dart';
 
 import '../../../providers/furniture_provider/furniture_provider.dart';
+import '../../../providers/home_page_provider/homepage_provider.dart';
 
 class MenuButtons extends StatelessWidget {
   MenuButtons({Key? key, required this.index}) : super(key: key);

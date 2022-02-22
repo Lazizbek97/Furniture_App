@@ -8,21 +8,16 @@ class FurnitureProvider extends ChangeNotifier {
   Box<FurnitureModel> models = Boxes.getMebel();
 
   Future<Box<FurnitureModel>> loadData() async {
+    print("Data box bo'shmi: ${models.isEmpty}");
     if (models.isEmpty) {
       List<FurnitureModel> data = await FurnitureService.fetchData();
       for (var item in data) {
         await models.add(item);
       }
     }
+    notifyListeners();
     return models;
   }
 }
 
-class HomePageProvider extends ChangeNotifier {
-  int menuIndex = 0;
 
-  void changeMenu(int i) {
-    menuIndex = i;
-    notifyListeners();
-  }
-}

@@ -4,6 +4,7 @@ import 'package:furniture_app/core/hive/hive_initialize.dart';
 import 'package:furniture_app/core/utils/router.dart';
 import 'package:furniture_app/core/utils/theme.dart';
 import 'package:furniture_app/screens/providers/furniture_provider/furniture_provider.dart';
+import 'package:furniture_app/screens/providers/home_page_provider/homepage_provider.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 
@@ -28,7 +29,11 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   RouteGenerator routeGenerate = RouteGenerator();
 
- 
+  @override
+  void initState() {
+    // TODO: implement initState
+    FurnitureProvider().loadData();
+  }
 
   // @override
   // void dispose() {
@@ -42,6 +47,9 @@ class _MyAppState extends State<MyApp> {
         FutureProvider<Box<FurnitureModel>>(
           create: (context) => FurnitureProvider().loadData(),
           initialData: Boxes.getMebel(),
+          catchError: (context, v) {
+            return Boxes.getMebel();
+          },
         ),
         ChangeNotifierProvider(create: (_) => HomePageProvider()),
       ],

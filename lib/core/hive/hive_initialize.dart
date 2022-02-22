@@ -10,6 +10,7 @@ class HiveInitialize {
     Hive.init(hiveDirectory.path);
     Hive.registerAdapter(FurnitureModelAdapter());
     Hive.registerAdapter(ItemAdapter());
+    Hive.registerAdapter(ReviewAdapter());
 
     await Hive.openBox<FurnitureModel>("mebel");
   }

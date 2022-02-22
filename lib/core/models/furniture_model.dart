@@ -7,6 +7,10 @@ import 'dart:convert';
 import 'package:hive/hive.dart';
 part 'furniture_model.g.dart';
 
+// To parse this JSON data, do
+//
+//     final furnitureModel = furnitureModelFromJson(jsonString);
+
 List<FurnitureModel> furnitureModelFromJson(String str) =>
     List<FurnitureModel>.from(
         json.decode(str).map((x) => FurnitureModel.fromJson(x)));
@@ -15,7 +19,7 @@ String furnitureModelToJson(List<FurnitureModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 @HiveType(typeId: 0)
-class FurnitureModel extends HiveObject {
+class FurnitureModel {
   FurnitureModel({
     this.title,
     this.icon,
@@ -63,7 +67,7 @@ class Item {
   @HiveField(4)
   double? ratings;
   @HiveField(5)
-  List<String>? reviews;
+  List<Review>? reviews;
 
   factory Item.fromJson(Map<String, dynamic> json) => Item(
         name: json["name"],
@@ -71,7 +75,8 @@ class Item {
         price: json["price"].toDouble(),
         disc: json["disc"],
         ratings: json["ratings"].toDouble(),
-        reviews: List<String>.from(json["reviews"].map((x) => x)),
+        reviews:
+            List<Review>.from(json["reviews"].map((x) => Review.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -80,6 +85,33 @@ class Item {
         "price": price,
         "disc": disc,
         "ratings": ratings,
-        "reviews": List<dynamic>.from(reviews!.map((x) => x)),
+        "reviews": List<dynamic>.from(reviews!.map((x) => x.toJson())),
+      };
+}
+
+@HiveType(typeId: 2)
+class Review {
+  Review({
+    this.name,
+    this.comment,
+    this.date,
+  });
+  @HiveField(0)
+  String? name;
+  @HiveField(1)
+  String? comment;
+  @HiveField(2)
+  String? date;
+
+  factory Review.fromJson(Map<String, dynamic> json) => Review(
+        name: json["name"],
+        comment: json["comment"],
+        date: json["date"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "name": name,
+        "comment": comment,
+        "date": date,
       };
 }
