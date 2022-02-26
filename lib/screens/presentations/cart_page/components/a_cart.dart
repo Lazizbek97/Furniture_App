@@ -4,7 +4,6 @@ import 'package:furniture_app/core/utils/size_config.dart';
 import 'package:furniture_app/screens/providers/cart_provider/cart_provider.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../core/services/cart_page_service/cart_page_service.dart';
 import '../../about_page.dart/components/plus_minus_item.dart';
 import '../../../../core/utils/constants.dart';
 
@@ -61,15 +60,21 @@ class A_Cart extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        context.read<CartProvider>().addCount(model);
+                        context.read<CartProvider>().totalSum();
+                      },
                       child: const PlusMinusItem(icon: Icon(Icons.add)),
                     ),
-                    const Text(
-                      "1",
-                      style: TextStyle(fontSize: 18.0),
+                    Text(
+                      model.count.toString(),
+                      style: const TextStyle(fontSize: 18.0),
                     ),
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        context.read<CartProvider>().removeCount(model);
+                        context.read<CartProvider>().totalSum();
+                      },
                       child: const PlusMinusItem(
                         icon: Icon(Icons.remove),
                       ),
@@ -81,8 +86,11 @@ class A_Cart extends StatelessWidget {
           ),
           IconButton(
               onPressed: () {
-                context.read<CartProvider>().deleteFromCartPage(model.name.toString());
-                // CartPageService.deleteFromCart(model);
+                model.count = 1;
+                context
+                    .read<CartProvider>()
+                    .deleteFromCartPage(model.name.toString());
+                context.read<CartProvider>().totalSum();
               },
               icon: const Icon(Icons.highlight_remove_outlined))
         ],

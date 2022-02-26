@@ -7,6 +7,7 @@ import 'package:furniture_app/core/utils/router.dart';
 import 'package:furniture_app/core/utils/theme.dart';
 import 'package:furniture_app/screens/providers/auth_provider/auth_provider.dart';
 import 'package:furniture_app/screens/providers/cart_provider/cart_provider.dart';
+import 'package:furniture_app/screens/providers/checkout_provider/checkout_provider.dart';
 import 'package:furniture_app/screens/providers/furniture_provider/furniture_provider.dart';
 import 'package:furniture_app/screens/providers/home_page_provider/homepage_provider.dart';
 import 'package:furniture_app/screens/providers/isfavorite_provider/is_favorite_provider.dart';
@@ -62,6 +63,7 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (_) => HomePageProvider()),
         ChangeNotifierProvider(create: (_) => IsFavoriteProvider()),
         ChangeNotifierProvider(create: (_) => CartProvider()),
+        ChangeNotifierProvider(create: (_) => CheckOutProvider()),
         ChangeNotifierProvider<AuthProvider>(
           create: (_) => AuthProvider(FirebaseAuth.instance),
         ),

@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:furniture_app/core/hive/hive_boxes.dart';
 import 'package:furniture_app/core/utils/size_config.dart';
+import 'package:furniture_app/screens/providers/checkout_provider/checkout_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 import '../../../core/utils/constants.dart';
+import '../../providers/cart_provider/cart_provider.dart';
 import 'components/checkout_container.dart';
+import 'components/checkout_details.dart';
 import 'components/checkout_title.dart';
 
 class CheckOutPage extends StatelessWidget {
@@ -127,79 +132,40 @@ class CheckOutPage extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "Order:",
-                          style: TextStyle(
-                              fontSize: 18.0,
-                              color: Constants.color80,
-                              fontWeight: Constants.regular),
-                        ),
-                        const Text(
-                          "\$ 95.00",
-                          style: TextStyle(
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.black,
+                    context.watch<CheckOutProvider>().discount != 0
+                        ? CheckoutDetails(
+                            title: "Discount:",
+                            price: context
+                                .watch<CheckOutProvider>()
+                                .discount
+                                .toString())
+                        : const SizedBox(
+                            height: 0,
                           ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "Delivery:",
-                          style: TextStyle(
-                              fontSize: 18.0,
-                              color: Constants.color80,
-                              fontWeight: Constants.regular),
-                        ),
-                        const Text(
-                          "\$ 5.00",
-                          style: TextStyle(
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "Total:",
-                          style: TextStyle(
-                              fontSize: 18.0,
-                              color: Constants.color80,
-                              fontWeight: Constants.regular),
-                        ),
-                        Text(
-                          "\$ 100.00",
-                          style: TextStyle(
-                            fontSize: 18.0,
-                            fontWeight: Constants.bold,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ],
-                    ),
+                    CheckoutDetails(
+                        title: "Order:",
+                        price: "${context.watch<CartProvider>().total}"),
+                    CheckoutDetails(title: "Delivery:", price: "5.00"),
+                    CheckoutDetails(
+                        title: "Total:",
+                        price: "${context.watch<CartProvider>().total + 5.0}"),
                   ],
                 ),
               ),
-              height: getHeight(135),
+              height: getHeight(155),
               width: getWidth(335),
             ),
             SizedBox(
               height: getHeight(60),
               width: getWidth(335),
               child: ElevatedButton(
-                onPressed: () =>
-                    Navigator.pushNamed(context, "/payment_completed"),
+                onPressed: ()async {
+                await  Boxes.getCartItems().clear();
+                context.read<CheckOutProvider>().addDiscount(0);
+                  Navigator.pushNamed(context, "/payment_completed");
+                },
                 child: const Text("SUBMIT ORDER"),
               ),
             )

@@ -11,6 +11,7 @@ import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/models/furniture_model.dart';
+import '../../providers/cart_provider/cart_provider.dart';
 import '../../providers/home_page_provider/homepage_provider.dart';
 import 'components/item_card.dart';
 import 'components/menu_button.dart';
@@ -130,7 +131,11 @@ class HomePageBody extends StatelessWidget {
                     ],
                   ),
                   IconButton(
-                    onPressed: () => Navigator.pushNamed(context, "/cart_page"),
+                    onPressed: () {
+                      context.read<CartProvider>().totalSum();
+
+                      Navigator.pushNamed(context, "/cart_page");
+                    },
                     icon: SvgPicture.asset(
                       Constants.cartImage,
                     ),

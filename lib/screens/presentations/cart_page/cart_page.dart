@@ -5,6 +5,7 @@ import 'package:furniture_app/screens/providers/cart_provider/cart_provider.dart
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
+import '../../providers/checkout_provider/checkout_provider.dart';
 import 'components/a_cart.dart';
 import 'components/promocode.dart';
 
@@ -46,23 +47,41 @@ class CartPage extends StatelessWidget {
                     final cartItems =
                         context.watch<CartProvider>().cartItems.values.toList();
 
-                    return ListView.separated(
-                      itemCount: cartItems.length,
-                      separatorBuilder: (context, index) {
-                        return Divider(
-                          color: Constants.dividerColor,
-                        );
-                      },
-                      itemBuilder: (context, index) {
-                        return A_Cart(
-                          model: cartItems[index],
-                        );
-                      },
-                    );
+                    return cartItems.isEmpty
+                        ? const Center(
+                            child: Text("Cart is Empty"),
+                          )
+                        : ListView.separated(
+                            itemCount: cartItems.length,
+                            separatorBuilder: (context, index) {
+                              return Divider(
+                                color: Constants.dividerColor,
+                              );
+                            },
+                            itemBuilder: (context, index) {
+                              return A_Cart(
+                                model: cartItems[index],
+                              );
+                            },
+                          );
                   }),
                 ),
               ),
               const PromoCodeEntry(),
+              context.watch<CheckOutProvider>().discount != 0
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text("Discount:"),
+                        Text("-${context
+                            .watch<CheckOutProvider>()
+                            .discount
+                            .toString()} \$")
+                      ],
+                    )
+                  : const SizedBox(
+                      height: 0,
+                    ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -74,7 +93,7 @@ class CartPage extends StatelessWidget {
                         fontWeight: Constants.bold),
                   ),
                   Text(
-                    "\$ 95.00",
+                    "\$ ${context.watch<CartProvider>().total}",
                     style: TextStyle(
                         fontSize: 20,
                         fontWeight: Constants.bold,

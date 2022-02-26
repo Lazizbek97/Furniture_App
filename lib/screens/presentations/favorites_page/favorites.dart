@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:furniture_app/core/hive/hive_boxes.dart';
 import 'package:furniture_app/core/widgets/barbutton.dart';
 import 'package:furniture_app/screens/providers/cart_provider/cart_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -36,7 +37,11 @@ class FavoritesPage extends StatelessWidget {
         ),
         actions: [
           IconButton(
-            onPressed: () => Navigator.pushNamed(context, "/cart_page"),
+            onPressed: () {
+              context.read<CartProvider>().totalSum();
+
+              Navigator.pushNamed(context, "/cart_page");
+            },
             icon: SvgPicture.asset(
               Constants.cartImage,
             ),
@@ -44,9 +49,9 @@ class FavoritesPage extends StatelessWidget {
         ],
       ),
       body: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Consumer<IsFavoriteProvider>(
-              builder: ((context, favoritesItemsBox, child) {
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Consumer<IsFavoriteProvider>(
+          builder: ((context, favoritesItemsBox, child) {
             final favoritesItemsBox =
                 context.watch<IsFavoriteProvider>().favorites.values.toList();
 
@@ -146,12 +151,22 @@ class FavoritesPage extends StatelessWidget {
                       ),
                     ),
                   );
-          }))),
+          }),
+        ),
+      ),
       floatingActionButton: SizedBox(
         height: getHeight(50),
         width: getWidth(334),
         child: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () async {
+            final favoritesItemsBox =
+                 Provider.of<IsFavoriteProvider>(context, listen: false).favorites.values.toList();
+            for (var item in favoritesItemsBox) {
+              await context
+                  .read<CartProvider>()
+                  .addCartPage(item, item.name.toString());
+            }
+          },
           child: const Text("Add all to my cart"),
           isExtended: true,
           shape: RoundedRectangleBorder(
