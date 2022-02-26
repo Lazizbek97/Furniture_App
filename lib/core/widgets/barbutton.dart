@@ -4,9 +4,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../utils/size_config.dart';
 
 class BagButton extends StatelessWidget {
-  const BagButton({
+   BagButton({
     Key? key,
+    required this.color
   }) : super(key: key);
+
+  Color color;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +23,7 @@ class BagButton extends StatelessWidget {
       ),
       child: SvgPicture.asset(
         "assets/images/bag.svg",
-        color: Colors.white,
+        color: color,
       ),
     );
   }

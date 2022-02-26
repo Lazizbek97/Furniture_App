@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:furniture_app/core/utils/constants.dart';
+import 'package:furniture_app/screens/providers/cart_provider/cart_provider.dart';
 import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/models/furniture_model.dart';
-import '../../../../core/services/favorites_page_service/cart_page_service/cart_page_service.dart';
 import '../../../../core/utils/size_config.dart';
 
 import '../../../../core/widgets/barbutton.dart';
@@ -16,8 +16,14 @@ class ItemCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var mebels = context.watch<Box<FurnitureModel>>().values.toList();
-    var home = context.watch<HomePageProvider>();
+    List<FurnitureModel> mebels =
+        context.watch<Box<FurnitureModel>>().values.toList();
+    HomePageProvider home = context.watch<HomePageProvider>();
+
+    Item item = mebels[home.menuIndex].items![index];
+
+    Box<Item> cartItems =
+        Provider.of<CartProvider>(context, listen: true).cartItems;
     return Container(
       margin: EdgeInsets.symmetric(horizontal: getWidth(10)),
       width: getWidth(157),
@@ -39,10 +45,7 @@ class ItemCard extends StatelessWidget {
                         borderRadius: BorderRadius.circular(20),
                         image: DecorationImage(
                           fit: BoxFit.cover,
-                          image: AssetImage(mebels[home.menuIndex]
-                              .items![index]
-                              .img![0]
-                              .toString()),
+                          image: AssetImage(item.img![0].toString()),
                         ),
                       ),
                     ),
@@ -50,11 +53,22 @@ class ItemCard extends StatelessWidget {
                       bottom: 10,
                       right: 10,
                       child: InkWell(
-                        onTap: () {
-                          CartPageService.addItemToCard(
-                              mebels[home.menuIndex].items![index]);
+                        onTap: () async {
+                          if (cartItems.containsKey(item.name)) {
+                            await context
+                                .read<CartProvider>()
+                                .deleteFromCartPage(item.name!);
+                          } else {
+                            await context
+                                .read<CartProvider>()
+                                .addCartPage(item, item.name!);
+                          }
                         },
-                        child: const BagButton(),
+                        child: cartItems.containsKey(item.name)
+                            ? BagButton(
+                                color: Colors.yellow,
+                              )
+                            : BagButton(color: Colors.white),
                       ),
                     ),
                   ],
@@ -66,10 +80,10 @@ class ItemCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    mebels[home.menuIndex].items![index].name.toString(),
+                    item.name.toString(),
                   ),
                   Text(
-                    "\$ ${mebels[home.menuIndex].items![index].price}",
+                    "\$ ${item.price}",
                     style: TextStyle(
                         color: Constants.color30, fontWeight: Constants.bold),
                   ),

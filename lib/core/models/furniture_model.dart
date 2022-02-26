@@ -55,6 +55,8 @@ class Item {
     this.disc,
     this.ratings,
     this.reviews,
+    this.isFavorite,
+    this.count,
   });
   @HiveField(0)
   String? name;
@@ -68,6 +70,10 @@ class Item {
   double? ratings;
   @HiveField(5)
   List<Review>? reviews;
+  @HiveField(6)
+  bool? isFavorite;
+  @HiveField(7)
+  int? count;
 
   factory Item.fromJson(Map<String, dynamic> json) => Item(
         name: json["name"],
@@ -77,6 +83,8 @@ class Item {
         ratings: json["ratings"].toDouble(),
         reviews:
             List<Review>.from(json["reviews"].map((x) => Review.fromJson(x))),
+        isFavorite: json["isFavorite"],
+        count: json["count"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -86,6 +94,8 @@ class Item {
         "disc": disc,
         "ratings": ratings,
         "reviews": List<dynamic>.from(reviews!.map((x) => x.toJson())),
+        "isFavorite": isFavorite,
+        "count": count,
       };
 }
 

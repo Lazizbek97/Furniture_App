@@ -11,7 +11,7 @@ class FurnitureProvider extends ChangeNotifier {
     print("Data box bo'shmi: ${models.isEmpty}");
     if (models.isEmpty) {
       List<FurnitureModel> data = await FurnitureService.fetchData();
-      for (var item in data) {
+      for (FurnitureModel item in data) {
         await models.add(item);
       }
     }

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:furniture_app/core/models/furniture_model.dart';
 import 'package:furniture_app/core/utils/size_config.dart';
+import 'package:furniture_app/screens/providers/cart_provider/cart_provider.dart';
+import 'package:provider/provider.dart';
 
-import '../../../../core/services/favorites_page_service/cart_page_service/cart_page_service.dart';
+import '../../../../core/services/cart_page_service/cart_page_service.dart';
 import '../../about_page.dart/components/plus_minus_item.dart';
 import '../../../../core/utils/constants.dart';
 
@@ -79,7 +81,8 @@ class A_Cart extends StatelessWidget {
           ),
           IconButton(
               onPressed: () {
-                CartPageService.deleteFromCart(model);
+                context.read<CartProvider>().deleteFromCartPage(model.name.toString());
+                // CartPageService.deleteFromCart(model);
               },
               icon: const Icon(Icons.highlight_remove_outlined))
         ],

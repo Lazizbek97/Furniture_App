@@ -7,6 +7,8 @@ class Furnitures {
         "items": [
           {
             "name": "Trotent",
+            "isFavorite": false,
+            "count": 1,
             "img": [
               "assets/images/furnitures/tables/minimalstand.png",
               "assets/images/furnitures/armchairs/sofa1.jpeg"
@@ -44,6 +46,8 @@ class Furnitures {
           },
           {
             "name": "Kivik",
+            "isFavorite": false,
+            "count": 1,
             "img": ["assets/images/furnitures/armchairs/sofa1.jpeg"],
             "price": 1.399,
             "disc":
@@ -78,6 +82,8 @@ class Furnitures {
           },
           {
             "name": "Symfonika",
+            "isFavorite": false,
+            "count": 1,
             "img": [
               "assets/images/furnitures/lamps/lamp1.jpg",
               "assets/images/furnitures/lamps/lamp2.jpg"
@@ -109,6 +115,8 @@ class Furnitures {
           },
           {
             "name": "Navlinge",
+            "isFavorite": false,
+            "count": 1,
             "img": ["assets/images/furnitures/lamps/lamp2.jpg"],
             "price": 39,
             "disc":
@@ -137,6 +145,8 @@ class Furnitures {
           },
           {
             "name": "Brimnes",
+            "isFavorite": false,
+            "count": 1,
             "img": ["assets/images/furnitures/beds/bed2.jpg"],
             "price": 210,
             "disc":
@@ -153,6 +163,8 @@ class Furnitures {
           },
           {
             "name": "Uppspel",
+            "isFavorite": false,
+            "count": 1,
             "img": ["assets/images/furnitures/tables/table5.jpg"],
             "price": 139.0,
             "disc":
@@ -187,6 +199,8 @@ class Furnitures {
           },
           {
             "name": "Stefan",
+            "isFavorite": false,
+            "count": 1,
             "img": ["assets/images/furnitures/chairs/chair5.jpg"],
             "price": 59,
             "disc":
@@ -209,14 +223,14 @@ class Furnitures {
           }
         ]
       },
-      
-      
       {
         "title": "Beds",
         "icon": "assets/images/bed.svg",
         "items": [
           {
             "name": "Malm",
+            "isFavorite": false,
+            "count": 1,
             "img": ["assets/images/furnitures/beds/bed1.jpg"],
             "price": 199,
             "disc":
@@ -233,6 +247,8 @@ class Furnitures {
           },
           {
             "name": "Brimnes",
+            "isFavorite": false,
+            "count": 1,
             "img": ["assets/images/furnitures/beds/bed2.jpg"],
             "price": 210,
             "disc":
@@ -249,6 +265,8 @@ class Furnitures {
           },
           {
             "name": "Neiden",
+            "isFavorite": false,
+            "count": 1,
             "img": ["assets/images/furnitures/beds/bed3.jpg"],
             "price": 119,
             "disc":
@@ -265,6 +283,8 @@ class Furnitures {
           },
           {
             "name": "Askvol",
+            "isFavorite": false,
+            "count": 1,
             "img": ["assets/images/furnitures/beds/bed4.jpg"],
             "price": 99,
             "disc":
@@ -281,6 +301,8 @@ class Furnitures {
           },
           {
             "name": "Songesand",
+            "isFavorite": false,
+            "count": 1,
             "img": ["assets/images/furnitures/beds/bed5.jpg"],
             "price": 139,
             "disc":
@@ -297,6 +319,8 @@ class Furnitures {
           },
           {
             "name": "Gursken",
+            "isFavorite": false,
+            "count": 1,
             "img": ["assets/images/furnitures/beds/bed6.jpg"],
             "price": 129,
             "disc":
@@ -313,6 +337,8 @@ class Furnitures {
           },
           {
             "name": "Tarva",
+            "isFavorite": false,
+            "count": 1,
             "img": ["assets/images/furnitures/beds/bed7.jpg"],
             "price": 219,
             "disc":
@@ -335,6 +361,8 @@ class Furnitures {
         "items": [
           {
             "name": "Bergmund",
+            "isFavorite": false,
+            "count": 1,
             "img": ["assets/images/furnitures/chairs/chair1.jpg"],
             "price": 99,
             "disc":
@@ -357,6 +385,8 @@ class Furnitures {
           },
           {
             "name": "Odger",
+            "isFavorite": false,
+            "count": 1,
             "img": ["assets/images/furnitures/chairs/chair2.jpg"],
             "price": 69,
             "disc":
@@ -379,6 +409,8 @@ class Furnitures {
           },
           {
             "name": "Ingolf",
+            "isFavorite": false,
+            "count": 1,
             "img": ["assets/images/furnitures/chairs/chair7.jpg"],
             "price": 69,
             "disc":
@@ -401,6 +433,8 @@ class Furnitures {
           },
           {
             "name": "Liefarne",
+            "isFavorite": false,
+            "count": 1,
             "img": ["assets/images/furnitures/chairs/chair4.png"],
             "price": 79,
             "disc":
@@ -423,6 +457,8 @@ class Furnitures {
           },
           {
             "name": "Lisabo",
+            "isFavorite": false,
+            "count": 1,
             "img": ["assets/images/furnitures/chairs/chair5.jpg"],
             "price": 89,
             "disc":
@@ -445,6 +481,8 @@ class Furnitures {
           },
           {
             "name": "Stefan",
+            "isFavorite": false,
+            "count": 1,
             "img": ["assets/images/furnitures/chairs/chair5.jpg"],
             "price": 59,
             "disc":
@@ -473,6 +511,8 @@ class Furnitures {
         "items": [
           {
             "name": "Storhaga",
+            "isFavorite": false,
+            "count": 1,
             "img": ["assets/images/furnitures/lamps/black_lamp.png"],
             "price": 19,
             "disc":
@@ -501,6 +541,8 @@ class Furnitures {
           },
           {
             "name": "Symfonika",
+            "isFavorite": false,
+            "count": 1,
             "img": ["assets/images/furnitures/lamps/lamp1.jpg"],
             "price": 29,
             "disc":
@@ -529,6 +571,8 @@ class Furnitures {
           },
           {
             "name": "Navlinge",
+            "isFavorite": false,
+            "count": 1,
             "img": ["assets/images/furnitures/lamps/lamp2.jpg"],
             "price": 39,
             "disc":
@@ -557,6 +601,8 @@ class Furnitures {
           },
           {
             "name": "Symfonisk",
+            "isFavorite": false,
+            "count": 1,
             "img": ["assets/images/furnitures/lamps/lamp3.jpg"],
             "price": 29,
             "disc":
@@ -585,6 +631,8 @@ class Furnitures {
           },
           {
             "name": "Hovnas",
+            "isFavorite": false,
+            "count": 1,
             "img": ["assets/images/furnitures/lamps/lamp4.jpg"],
             "price": 19,
             "disc":
@@ -613,6 +661,8 @@ class Furnitures {
           },
           {
             "name": "Fado",
+            "isFavorite": false,
+            "count": 1,
             "img": ["assets/images/furnitures/lamps/lamp5.jpg"],
             "price": 59,
             "disc":
@@ -641,6 +691,8 @@ class Furnitures {
           },
           {
             "name": "Solknit",
+            "isFavorite": false,
+            "count": 1,
             "img": ["assets/images/furnitures/lamps/lamp6.jpg"],
             "price": 32,
             "disc":
@@ -669,6 +721,8 @@ class Furnitures {
           },
           {
             "name": "Dejsa",
+            "isFavorite": false,
+            "count": 1,
             "img": ["assets/images/furnitures/lamps/lamp7.jpg"],
             "price": 21,
             "disc":
@@ -697,6 +751,8 @@ class Furnitures {
           },
           {
             "name": "Snobyar",
+            "isFavorite": false,
+            "count": 1,
             "img": ["assets/images/furnitures/lamps/lamp8.jpg"],
             "price": 32,
             "disc":
@@ -731,6 +787,8 @@ class Furnitures {
         "items": [
           {
             "name": "Kivik",
+            "isFavorite": false,
+            "count": 1,
             "img": ["assets/images/furnitures/armchairs/sofa1.jpeg"],
             "price": 1.399,
             "disc":
@@ -765,6 +823,8 @@ class Furnitures {
           },
           {
             "name": "Soderhamn",
+            "isFavorite": false,
+            "count": 1,
             "img": ["assets/images/furnitures/armchairs/sofa2.jpg"],
             "price": 1.499,
             "disc":
@@ -799,6 +859,8 @@ class Furnitures {
           },
           {
             "name": "Morabo",
+            "isFavorite": false,
+            "count": 1,
             "img": ["assets/images/furnitures/armchairs/sofa3.jpg"],
             "price": 1.699,
             "disc":
@@ -833,6 +895,8 @@ class Furnitures {
           },
           {
             "name": "Uppland",
+            "isFavorite": false,
+            "count": 1,
             "img": ["assets/images/furnitures/armchairs/sofa4.jpg"],
             "price": 1.799,
             "disc":
@@ -867,6 +931,8 @@ class Furnitures {
           },
           {
             "name": "Harlanda",
+            "isFavorite": false,
+            "count": 1,
             "img": ["assets/images/furnitures/armchairs/sofa5.jpg"],
             "price": 1.199,
             "disc":
@@ -901,6 +967,8 @@ class Furnitures {
           },
           {
             "name": "Finnala",
+            "isFavorite": false,
+            "count": 1,
             "img": ["assets/images/furnitures/armchairs/sofa6.jpg"],
             "price": 1.299,
             "disc":
@@ -935,6 +1003,8 @@ class Furnitures {
           },
           {
             "name": "Lidhult",
+            "isFavorite": false,
+            "count": 1,
             "img": ["assets/images/furnitures/armchairs/sofa7.png"],
             "price": 1.599,
             "disc":
@@ -975,6 +1045,8 @@ class Furnitures {
         "items": [
           {
             "name": "Trotent",
+            "isFavorite": false,
+            "count": 1,
             "img": ["assets/images/furnitures/tables/minimalstand.png"],
             "price": 119.0,
             "disc":
@@ -1009,6 +1081,8 @@ class Furnitures {
           },
           {
             "name": "Rodulf",
+            "isFavorite": false,
+            "count": 1,
             "img": ["assets/images/furnitures/tables/table1.jpg"],
             "price": 129.0,
             "disc":
@@ -1043,6 +1117,8 @@ class Furnitures {
           },
           {
             "name": "Bekant",
+            "isFavorite": false,
+            "count": 1,
             "img": ["assets/images/furnitures/tables/table2.jpg"],
             "price": 219.0,
             "disc":
@@ -1077,6 +1153,8 @@ class Furnitures {
           },
           {
             "name": "Idasen",
+            "isFavorite": false,
+            "count": 1,
             "img": ["assets/images/furnitures/tables/table3.jpg"],
             "price": 109.0,
             "disc":
@@ -1111,6 +1189,8 @@ class Furnitures {
           },
           {
             "name": "Skarsta",
+            "isFavorite": false,
+            "count": 1,
             "img": ["assets/images/furnitures/tables/table4.jpg"],
             "price": 149.0,
             "disc":
@@ -1145,6 +1225,8 @@ class Furnitures {
           },
           {
             "name": "Uppspel",
+            "isFavorite": false,
+            "count": 1,
             "img": ["assets/images/furnitures/tables/table5.jpg"],
             "price": 139.0,
             "disc":
@@ -1179,6 +1261,8 @@ class Furnitures {
           },
           {
             "name": "Malm",
+            "isFavorite": false,
+            "count": 1,
             "img": ["assets/images/furnitures/tables/table6.jpg"],
             "price": 119.0,
             "disc":

@@ -2,21 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:furniture_app/core/utils/constants.dart';
 import 'package:furniture_app/core/utils/size_config.dart';
+import 'package:furniture_app/screens/providers/isfavorite_provider/is_favorite_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/models/furniture_model.dart';
-import '../../../core/services/favorites_page_service/favorites_service.dart';
 import '../../providers/home_page_provider/homepage_provider.dart';
 import 'components/color_picker.dart';
 import 'components/plus_minus_item.dart';
 
-class AboutPage extends StatelessWidget {
+class AboutPage extends StatefulWidget {
   AboutPage({Key? key, required this.index}) : super(key: key);
 
   int index;
 
+  @override
+  State<AboutPage> createState() => _AboutPageState();
+}
+
+class _AboutPageState extends State<AboutPage> {
   @override
   Widget build(BuildContext context) {
     var home = context.watch<HomePageProvider>();
@@ -24,7 +29,10 @@ class AboutPage extends StatelessWidget {
         .watch<Box<FurnitureModel>>()
         .values
         .toList()[home.menuIndex]
-        .items![index];
+        .items![widget.index];
+
+    Box<Item> favorites =
+        Provider.of<IsFavoriteProvider>(context, listen: true).favorites;
     return Scaffold(
       body: Column(
         children: [
@@ -142,7 +150,7 @@ class AboutPage extends StatelessWidget {
                               TextButton(
                                 onPressed: () => Navigator.pushNamed(
                                     context, "/review_ratings",
-                                    arguments: index),
+                                    arguments: widget.index),
                                 child: Text(
                                   "(${mebels.reviews!.length} reviews)",
                                   style: TextStyle(
@@ -196,8 +204,19 @@ class AboutPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       InkWell(
-                        onTap: () {
-                          FavoritesPageService.addItemToFavorites(mebels);
+                        onTap: () async {
+                          if (Provider.of<IsFavoriteProvider>(context,
+                                  listen: false)
+                              .favorites
+                              .containsKey(mebels.name)) {
+                            await context
+                                .read<IsFavoriteProvider>()
+                                .deleteFromFavorites(mebels.name!);
+                          } else {
+                            await context
+                                .read<IsFavoriteProvider>()
+                                .addFavorites(mebels, mebels.name!);
+                          }
                         },
                         child: Container(
                           height: getHeight(60),
@@ -206,7 +225,10 @@ class AboutPage extends StatelessWidget {
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(15),
                               color: const Color(0xffF0F0F0)),
-                          child: SvgPicture.asset("assets/images/bookmark.svg"),
+                          child: favorites.containsKey(mebels.name)
+                              ? SvgPicture.asset(
+                                  "assets/images/bookmark_filled.svg")
+                              : SvgPicture.asset("assets/images/bookmark.svg"),
                         ),
                       ),
                       SizedBox(

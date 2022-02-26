@@ -15,6 +15,8 @@ class HiveInitialize {
     Hive.registerAdapter(ReviewAdapter());
 
     await Hive.openBox<FurnitureModel>("mebel");
+    await Hive.openBox<Item>("favorites");
+    await Hive.openBox<Item>("cart");
 
     Hive.registerAdapter(UserModelAdapter());
     Hive.registerAdapter(MyReviewAdapter());

@@ -63,13 +63,15 @@ class ItemAdapter extends TypeAdapter<Item> {
       disc: fields[3] as String?,
       ratings: fields[4] as double?,
       reviews: (fields[5] as List?)?.cast<Review>(),
+      isFavorite: fields[6] as bool?,
+      count: fields[7] as int?,
     );
   }
 
   @override
   void write(BinaryWriter writer, Item obj) {
     writer
-      ..writeByte(6)
+      ..writeByte(8)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(1)
@@ -81,7 +83,11 @@ class ItemAdapter extends TypeAdapter<Item> {
       ..writeByte(4)
       ..write(obj.ratings)
       ..writeByte(5)
-      ..write(obj.reviews);
+      ..write(obj.reviews)
+      ..writeByte(6)
+      ..write(obj.isFavorite)
+      ..writeByte(7)
+      ..write(obj.count);
   }
 
   @override

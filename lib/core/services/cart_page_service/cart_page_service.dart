@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../../../screens/providers/auth_provider/auth_provider.dart';
-import '../../../models/furniture_model.dart';
+import '../../models/furniture_model.dart';
 
 class CartPageService {
   static CollectionReference userCollection =
