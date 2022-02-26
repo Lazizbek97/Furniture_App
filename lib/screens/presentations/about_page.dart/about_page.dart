@@ -7,6 +7,7 @@ import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/models/furniture_model.dart';
+import '../../../core/services/favorites_page_service/favorites_service.dart';
 import '../../providers/home_page_provider/homepage_provider.dart';
 import 'components/color_picker.dart';
 import 'components/plus_minus_item.dart';
@@ -195,7 +196,9 @@ class AboutPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          FavoritesPageService.addItemToFavorites(mebels);
+                        },
                         child: Container(
                           height: getHeight(60),
                           width: getHeight(60),

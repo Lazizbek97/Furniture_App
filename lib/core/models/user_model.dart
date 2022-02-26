@@ -4,17 +4,23 @@
 
 import 'dart:convert';
 
+import 'package:hive/hive.dart';
+
+part 'user_model.g.dart';
+
 List<UserModel> userModelFromJson(String str) =>
     List<UserModel>.from(json.decode(str).map((x) => UserModel.fromJson(x)));
 
 String userModelToJson(List<UserModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
+@HiveType(typeId: 3)
 class UserModel {
   UserModel({
     this.name,
     this.email,
     this.password,
+    this.image,
     this.myCart,
     this.favorites,
     this.notifications,
@@ -23,22 +29,34 @@ class UserModel {
     this.shippingAddress,
     this.orders,
   });
-
+  @HiveField(0)
   String? name;
+  @HiveField(1)
   String? email;
+  @HiveField(2)
   String? password;
+  @HiveField(3)
+  String? image;
+  @HiveField(4)
   List<dynamic>? myCart;
+  @HiveField(5)
   List<dynamic>? favorites;
+  @HiveField(6)
   List<dynamic>? notifications;
+  @HiveField(7)
   List<MyReview>? myReviews;
+  @HiveField(8)
   List<PaymentMethod>? paymentMethods;
+  @HiveField(9)
   List<ShippingAddress>? shippingAddress;
+  @HiveField(10)
   Orders? orders;
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
         name: json["name"],
         email: json["email"],
         password: json["password"],
+        image: json["image"],
         myCart: List<dynamic>.from(json["my_cart"].map((x) => x)),
         favorites: List<dynamic>.from(json["favorites"].map((x) => x)),
         notifications: List<dynamic>.from(json["notifications"].map((x) => x)),
@@ -55,6 +73,7 @@ class UserModel {
         "name": name,
         "email": email,
         "password": password,
+        "image": image,
         "my_cart": List<dynamic>.from(myCart!.map((x) => x)),
         "favorites": List<dynamic>.from(favorites!.map((x) => x)),
         "notifications": List<dynamic>.from(notifications!.map((x) => x)),
@@ -67,6 +86,7 @@ class UserModel {
       };
 }
 
+@HiveType(typeId: 4)
 class MyReview {
   MyReview({
     this.name,
@@ -75,11 +95,15 @@ class MyReview {
     this.date,
     this.review,
   });
-
+  @HiveField(0)
   String? name;
+  @HiveField(1)
   String? price;
+  @HiveField(2)
   int? rating;
+  @HiveField(3)
   String? date;
+  @HiveField(4)
   String? review;
 
   factory MyReview.fromJson(Map<String, dynamic> json) => MyReview(
@@ -99,15 +123,18 @@ class MyReview {
       };
 }
 
+@HiveType(typeId: 5)
 class Orders {
   Orders({
     this.delivered,
     this.proccessing,
     this.canceled,
   });
-
+  @HiveField(0)
   List<Canceled>? delivered;
+  @HiveField(1)
   List<Canceled>? proccessing;
+  @HiveField(2)
   List<Canceled>? canceled;
 
   factory Orders.fromJson(Map<String, dynamic> json) => Orders(
@@ -126,6 +153,7 @@ class Orders {
       };
 }
 
+@HiveType(typeId: 6)
 class Canceled {
   Canceled({
     this.id,
@@ -134,11 +162,15 @@ class Canceled {
     this.totalAmount,
     this.items,
   });
-
+  @HiveField(0)
   String? id;
+  @HiveField(1)
   String? date;
+  @HiveField(2)
   int? quantity;
+  @HiveField(3)
   int? totalAmount;
+  @HiveField(4)
   List<dynamic>? items;
 
   factory Canceled.fromJson(Map<String, dynamic> json) => Canceled(
@@ -158,6 +190,7 @@ class Canceled {
       };
 }
 
+@HiveType(typeId: 7)
 class PaymentMethod {
   PaymentMethod({
     this.holderName,
@@ -165,10 +198,13 @@ class PaymentMethod {
     this.cvvCode,
     this.expirationDate,
   });
-
+  @HiveField(0)
   String? holderName;
+  @HiveField(1)
   String? cardNumber;
+  @HiveField(2)
   String? cvvCode;
+  @HiveField(3)
   String? expirationDate;
 
   factory PaymentMethod.fromJson(Map<String, dynamic> json) => PaymentMethod(
@@ -186,6 +222,7 @@ class PaymentMethod {
       };
 }
 
+@HiveType(typeId: 8)
 class ShippingAddress {
   ShippingAddress({
     this.name,
@@ -195,12 +232,17 @@ class ShippingAddress {
     this.city,
     this.district,
   });
-
+  @HiveField(0)
   String? name;
+  @HiveField(1)
   String? address;
+  @HiveField(2)
   int? zipCode;
+  @HiveField(3)
   String? country;
+  @HiveField(4)
   String? city;
+  @HiveField(5)
   String? district;
 
   factory ShippingAddress.fromJson(Map<String, dynamic> json) =>

@@ -1,8 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:furniture_app/core/hive/hive_boxes.dart';
 import 'package:furniture_app/core/hive/hive_initialize.dart';
 import 'package:furniture_app/core/utils/router.dart';
 import 'package:furniture_app/core/utils/theme.dart';
+import 'package:furniture_app/screens/providers/auth_provider/auth_provider.dart';
 import 'package:furniture_app/screens/providers/furniture_provider/furniture_provider.dart';
 import 'package:furniture_app/screens/providers/home_page_provider/homepage_provider.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -12,6 +15,7 @@ import 'core/models/furniture_model.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   await HiveInitialize.initHive();
 
   runApp(
@@ -52,6 +56,12 @@ class _MyAppState extends State<MyApp> {
           },
         ),
         ChangeNotifierProvider(create: (_) => HomePageProvider()),
+        ChangeNotifierProvider<AuthProvider>(
+          create: (_) => AuthProvider(FirebaseAuth.instance),
+        ),
+        StreamProvider(
+            create: (context) => context.read<AuthProvider>().authChanges,
+            initialData: 0)
       ],
       child: MaterialApp(
         title: 'Furniture app',

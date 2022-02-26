@@ -6,7 +6,6 @@ import 'package:furniture_app/core/utils/size_config.dart';
 import 'package:furniture_app/screens/presentations/account_page/account_page.dart';
 import 'package:furniture_app/screens/presentations/favorites_page/favorites.dart';
 import 'package:furniture_app/screens/presentations/notifications_page/notifications_page.dart';
-import 'package:furniture_app/screens/providers/furniture_provider/furniture_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
@@ -35,13 +34,14 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return Scaffold(
       body: _pages[_navbarIndex],
       bottomNavigationBar: BottomNavigationBar(
           showSelectedLabels: false,
           showUnselectedLabels: false,
           currentIndex: _navbarIndex,
-          onTap: (v) {
+          onTap: (v) async {
             setState(() {
               _navbarIndex = v;
             });

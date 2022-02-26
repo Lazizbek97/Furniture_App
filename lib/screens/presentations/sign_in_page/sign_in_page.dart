@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:furniture_app/core/utils/constants.dart';
 import 'package:furniture_app/core/utils/size_config.dart';
+import 'package:furniture_app/core/widgets/snackBar.dart';
+import 'package:furniture_app/screens/providers/auth_provider/auth_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 import '../../../core/widgets/login_top_part.dart';
 import '../../../core/widgets/name_email_input.dart';
@@ -89,7 +92,22 @@ class SignInPage extends StatelessWidget {
                       height: getHeight(50),
                       width: getWidth(285),
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          context
+                              .read<AuthProvider>()
+                              .signIn(
+                                  email: _emailConstroller.text,
+                                  password: _passwordConstroller.text)
+                              .then(
+                                (value) => value == 'signed in'
+                                    ? Navigator.pushNamedAndRemoveUntil(
+                                        context,
+                                        "/home_page",
+                                        (route) => false,
+                                      )
+                                    : SnackBarWidget.show(value, context),
+                              );
+                        },
                         child: const Text("Log in"),
                       ),
                     ),

@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:furniture_app/core/models/furniture_model.dart';
 import 'package:furniture_app/core/utils/size_config.dart';
 
+import '../../../../core/services/favorites_page_service/cart_page_service/cart_page_service.dart';
 import '../../about_page.dart/components/plus_minus_item.dart';
 import '../../../../core/utils/constants.dart';
 
 class A_Cart extends StatelessWidget {
   const A_Cart({
     Key? key,
+    required this.model,
   }) : super(key: key);
+
+  final Item model;
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +29,9 @@ class A_Cart extends StatelessWidget {
             width: getHeight(100),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
-              image: const DecorationImage(
+              image: DecorationImage(
                 fit: BoxFit.cover,
-                image: AssetImage("assets/images/minimalstand.png"),
+                image: AssetImage(model.img![0].toString()),
               ),
             ),
           ),
@@ -35,13 +40,13 @@ class A_Cart extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Minimal Stand",
+                model.name.toString(),
                 style: TextStyle(
                     color: const Color(0xff999999),
                     fontWeight: Constants.semiBold),
               ),
               Text(
-                "\$ 25.00",
+                "\$ ${model.price}",
                 style: TextStyle(
                   fontWeight: Constants.bold,
                   fontSize: 16,
@@ -73,11 +78,12 @@ class A_Cart extends StatelessWidget {
             ],
           ),
           IconButton(
-              onPressed: () {},
+              onPressed: () {
+                CartPageService.deleteFromCart(model);
+              },
               icon: const Icon(Icons.highlight_remove_outlined))
         ],
       ),
     );
-  
   }
 }

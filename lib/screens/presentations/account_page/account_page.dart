@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:furniture_app/core/utils/size_config.dart';
+import 'package:furniture_app/screens/providers/auth_provider/auth_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 import '../../../core/utils/constants.dart';
 import 'components/account_page_menu.dart';
@@ -11,6 +13,7 @@ class AccountPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var user = context.watch<AuthProvider>().fireBaseAuth.currentUser;
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -29,7 +32,9 @@ class AccountPage extends StatelessWidget {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              context.read<AuthProvider>().signOut();
+            },
             icon: SvgPicture.asset(
               "assets/images/logout.svg",
             ),
@@ -54,10 +59,10 @@ class AccountPage extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      "Lazizbek Fayziev",
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    Text(
+                      user!.displayName.toString(),
+                      style: const TextStyle(
+                          fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     Text(
                       "ibnshomurod@mail.ru",

@@ -3,6 +3,7 @@ class UserData {
     "name": "",
     "email": "",
     "password": "",
+    "image":"",
     "my_cart": [],
     "favorites": [],
     "notifications": [],

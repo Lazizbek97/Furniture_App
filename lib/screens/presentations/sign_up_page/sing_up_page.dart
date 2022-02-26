@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:furniture_app/core/services/user_service/user_info_service.dart';
 import 'package:furniture_app/core/utils/constants.dart';
 import 'package:furniture_app/core/utils/size_config.dart';
+import 'package:furniture_app/screens/providers/auth_provider/auth_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 import '../../../core/widgets/login_top_part.dart';
 import '../../../core/widgets/name_email_input.dart';
 import '../../../core/widgets/password_input.dart';
+import '../../../core/widgets/snackBar.dart';
 
 class SignUpPage extends StatelessWidget {
   SignUpPage({Key? key}) : super(key: key);
@@ -79,8 +83,9 @@ class SignUpPage extends StatelessWidget {
                       height: getHeight(50),
                       width: getWidth(285),
                       child: ElevatedButton(
-                        onPressed: () => Navigator.pushNamedAndRemoveUntil(
-                            context, "/home_page", (route) => false),
+                        onPressed: () async {
+                          await _addUser(context);
+                        },
                         child: const Text("SIGN UP"),
                       ),
                     ),
@@ -98,7 +103,7 @@ class SignUpPage extends StatelessWidget {
                         TextButton(
                           onPressed: () => Navigator.pop(context),
                           child: Text(
-                            "SIGN IN",
+                            "Sign In",
                             style: TextStyle(
                               fontWeight: Constants.bold,
                               fontSize: Constants.disTextSize,
@@ -115,6 +120,28 @@ class SignUpPage extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  _addUser(BuildContext context) async {
+    context
+        .read<AuthProvider>()
+        .signUp(
+            email: _emailConstroller.text,
+            password: _passwordConstroller.text,
+            name: _nameConstroller.text)
+        .then(
+      (value) async {
+        if (value == 'signed in') {
+          await UserInfoService.addNewUser(
+              context: context,
+              emailConstroller: _emailConstroller,
+              nameConstroller: _nameConstroller,
+              passwordConstroller: _passwordConstroller);
+        } else {
+          SnackBarWidget.show(value, context);
+        }
+      },
     );
   }
 }

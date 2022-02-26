@@ -14,6 +14,8 @@ import 'package:furniture_app/screens/presentations/payment_methods_page/payment
 import 'package:furniture_app/screens/presentations/rating_reviews/rating_reviews.dart';
 import 'package:furniture_app/screens/presentations/settings_page/settings_page.dart';
 import 'package:furniture_app/screens/presentations/shipping_address_page/shipping_address.dart';
+import 'package:furniture_app/screens/providers/auth_provider/auth_provider.dart';
+import 'package:provider/provider.dart';
 
 import '../../screens/presentations/sign_in_page/sign_in_page.dart';
 import '../../screens/presentations/sign_up_page/sing_up_page.dart';
@@ -23,7 +25,14 @@ class RouteGenerator {
     final args = settings.arguments;
     switch (settings.name) {
       case '/':
-        return MaterialPageRoute(builder: (_) => const Boarding());
+        return MaterialPageRoute(builder: (context) {
+          final fireBaseUser = context.watch<AuthProvider>();
+          if (fireBaseUser.fireBaseAuth.currentUser != null) {
+            return const HomePage();
+          } else {
+            return const Boarding();
+          }
+        });
       case '/signIn':
         return MaterialPageRoute(builder: (_) => SignInPage());
       case '/signUp':

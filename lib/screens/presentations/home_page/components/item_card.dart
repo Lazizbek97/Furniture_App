@@ -4,6 +4,7 @@ import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/models/furniture_model.dart';
+import '../../../../core/services/favorites_page_service/cart_page_service/cart_page_service.dart';
 import '../../../../core/utils/size_config.dart';
 
 import '../../../../core/widgets/barbutton.dart';
@@ -49,7 +50,10 @@ class ItemCard extends StatelessWidget {
                       bottom: 10,
                       right: 10,
                       child: InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          CartPageService.addItemToCard(
+                              mebels[home.menuIndex].items![index]);
+                        },
                         child: const BagButton(),
                       ),
                     ),
