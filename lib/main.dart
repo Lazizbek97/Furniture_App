@@ -11,6 +11,7 @@ import 'package:furniture_app/screens/providers/checkout_provider/checkout_provi
 import 'package:furniture_app/screens/providers/furniture_provider/furniture_provider.dart';
 import 'package:furniture_app/screens/providers/home_page_provider/homepage_provider.dart';
 import 'package:furniture_app/screens/providers/isfavorite_provider/is_favorite_provider.dart';
+import 'package:furniture_app/screens/providers/payment_provider/payment_provider.dart';
 import 'package:furniture_app/screens/providers/shipping_address_provider/shipping_adress_provider.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
@@ -66,6 +67,7 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (_) => CartProvider()),
         ChangeNotifierProvider(create: (_) => CheckOutProvider()),
         ChangeNotifierProvider(create: (_) => ShippingAddressProvider()),
+        ChangeNotifierProvider(create: (_) => PaymentProvider()),
         ChangeNotifierProvider<AuthProvider>(
           create: (_) => AuthProvider(FirebaseAuth.instance),
         ),

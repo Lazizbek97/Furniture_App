@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:furniture_app/core/services/payment_service/payment_service.dart';
 import 'package:furniture_app/screens/presentations/add_payment_method/components/text_input_field.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -11,6 +12,8 @@ class AddingPaymentMethodPage extends StatelessWidget {
 
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _cardNumberController = TextEditingController();
+  final TextEditingController _scvNumberController = TextEditingController();
+  final TextEditingController _expiryController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -137,7 +140,7 @@ class AddingPaymentMethodPage extends StatelessWidget {
                         SizedBox(
                           width: getWidth(157),
                           child: TextInputField(
-                            controller: _nameController,
+                            controller: _scvNumberController,
                             title: "CVV",
                             hintText: "Ex: 123",
                             backColor: const Color(0xffF5F5F5),
@@ -147,7 +150,7 @@ class AddingPaymentMethodPage extends StatelessWidget {
                         SizedBox(
                           width: getWidth(157),
                           child: TextInputField(
-                            controller: _cardNumberController,
+                            controller: _expiryController,
                             title: "Epiration Date",
                             hintText: "03/22",
                             backColor: Colors.white,
@@ -165,7 +168,15 @@ class AddingPaymentMethodPage extends StatelessWidget {
                   height: getHeight(60),
                   width: getWidth(335),
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: ()async {
+                     await PaymentPageService.addItemToPaymentMethod(
+                        cardNumber: _cardNumberController,
+                        expirationDate: _expiryController,
+                        cvvCode: _scvNumberController,
+                        holderName: _nameController,
+                      );
+                      Navigator.pop(context);
+                    },
                     child: const Text(
                       "ADD NEW CARD",
                       style: TextStyle(fontSize: 20),

@@ -80,6 +80,7 @@ class ShippingAddressPage extends StatelessWidget {
                                               __
                                           ? true
                                           : false,
+                                          
                                       checkColor: Colors.white,
                                       activeColor: Constants.color30,
                                       shape: RoundedRectangleBorder(

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:furniture_app/core/hive/hive_boxes.dart';
 import 'package:furniture_app/core/widgets/barbutton.dart';
 import 'package:furniture_app/screens/providers/cart_provider/cart_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -160,7 +159,10 @@ class FavoritesPage extends StatelessWidget {
         child: FloatingActionButton(
           onPressed: () async {
             final favoritesItemsBox =
-                 Provider.of<IsFavoriteProvider>(context, listen: false).favorites.values.toList();
+                Provider.of<IsFavoriteProvider>(context, listen: false)
+                    .favorites
+                    .values
+                    .toList();
             for (var item in favoritesItemsBox) {
               await context
                   .read<CartProvider>()

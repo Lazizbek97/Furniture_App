@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:furniture_app/core/utils/constants.dart';
 import 'package:furniture_app/core/utils/size_config.dart';
 import 'package:furniture_app/screens/providers/cart_provider/cart_provider.dart';
+import 'package:furniture_app/screens/providers/payment_provider/payment_provider.dart';
 import 'package:furniture_app/screens/providers/shipping_address_provider/shipping_adress_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -104,14 +105,33 @@ class CartPage extends StatelessWidget {
                 height: getHeight(60),
                 width: getWidth(335),
                 child: ElevatedButton(
-                    onPressed: ()async {
-                    await  context
-                          .read<ShippingAddressProvider>()
-                          .checkAddressList()
-                          .then((value) => value
-                              ? Navigator.pushNamed(context, '/checkout_page')
-                              : Navigator.pushNamed(
-                                  context, '/shipping_address'));
+                    onPressed: () async {
+                      final cartItems =
+                          Provider.of<CartProvider>(context, listen: false)
+                              .cartItems
+                              .values
+                              .toList();
+
+                      cartItems.isNotEmpty
+                          ? await context
+                              .read<ShippingAddressProvider>()
+                              .checkAddressList()
+                              .then((value) {
+                              if (value) {
+                                context
+                                    .read<PaymentProvider>()
+                                    .checkPaymentMethodList()
+                                    .then((v) => v
+                                        ? Navigator.pushNamed(
+                                            context, '/checkout_page')
+                                        : Navigator.pushNamed(
+                                            context, '/payment_methods'));
+                              } else {
+                                Navigator.pushNamed(
+                                    context, '/shipping_address');
+                              }
+                            })
+                          : null;
                     },
                     child: const Text("Check out")),
               )

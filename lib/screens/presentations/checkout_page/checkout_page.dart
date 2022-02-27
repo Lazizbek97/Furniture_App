@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:furniture_app/core/hive/hive_boxes.dart';
 import 'package:furniture_app/core/utils/size_config.dart';
 import 'package:furniture_app/screens/providers/checkout_provider/checkout_provider.dart';
+import 'package:furniture_app/screens/providers/payment_provider/payment_provider.dart';
 import 'package:furniture_app/screens/providers/shipping_address_provider/shipping_adress_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -45,7 +46,8 @@ class CheckOutPage extends StatelessWidget {
                 CheckoutTitle(
                   title: "Shipping Address",
                   editFunc: () {
-                    Navigator.pushReplacementNamed(context, '/shipping_address');
+                    Navigator.pushReplacementNamed(
+                        context, '/shipping_address');
                   },
                 ),
                 CheckOutContainer(
@@ -94,14 +96,17 @@ class CheckOutPage extends StatelessWidget {
               children: [
                 CheckoutTitle(
                   title: "Payment",
-                  editFunc: () {},
+                  editFunc: () {
+                     Navigator.pushReplacementNamed(
+                        context, '/payment_methods');
+                  },
                 ),
                 CheckOutContainer(
                   child: Row(
                     children: [
                       Image.asset("assets/images/master_card.png"),
                       Text(
-                        "**** **** **** 3947",
+                        "**** **** **** ${context.watch<PaymentProvider>().paymentModel!.cardNumber.toString().substring(context.watch<PaymentProvider>().paymentModel!.cardNumber.toString().length - 4)}",
                         style: TextStyle(
                           fontWeight: Constants.semiBold,
                         ),
