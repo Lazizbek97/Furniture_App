@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:furniture_app/core/models/user_model.dart';
+import 'package:furniture_app/core/services/shipping_address_service/shipping_address_service.dart';
 import 'package:furniture_app/core/utils/size_config.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -56,6 +58,7 @@ class AddingShipmentAdressPage extends StatelessWidget {
               InputFieldAdress(
                 controller: _zipcodeController,
                 title: "Zipcode (Postal Code)",
+                ktype: TextInputType.number,
                 hintText: "100001",
                 backColor: Colors.white,
                 borderColor: const Color(0xffDBDBDB),
@@ -88,7 +91,18 @@ class AddingShipmentAdressPage extends StatelessWidget {
                 height: getHeight(60),
                 width: getWidth(335),
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    var newAddress = ShippingAddress(
+                        address: _addressController.text,
+                        city: _cityController.text,
+                        country: _countryController.text,
+                        district: _districtController.text,
+                        name: _nameController.text,
+                        zipCode: int.parse(_zipcodeController.text));
+                    await ShippingPageService.addItemToShppingAddress(
+                        newAddress);
+                    Navigator.pop(context);
+                  },
                   child: const Text(
                     "SAVE ADDRESS",
                     style: TextStyle(fontSize: 20),

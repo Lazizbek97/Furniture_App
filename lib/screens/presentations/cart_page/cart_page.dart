@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:furniture_app/core/utils/constants.dart';
 import 'package:furniture_app/core/utils/size_config.dart';
 import 'package:furniture_app/screens/providers/cart_provider/cart_provider.dart';
+import 'package:furniture_app/screens/providers/shipping_address_provider/shipping_adress_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -73,10 +74,8 @@ class CartPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         const Text("Discount:"),
-                        Text("-${context
-                            .watch<CheckOutProvider>()
-                            .discount
-                            .toString()} \$")
+                        Text(
+                            "-${context.watch<CheckOutProvider>().discount.toString()} \$")
                       ],
                     )
                   : const SizedBox(
@@ -105,8 +104,15 @@ class CartPage extends StatelessWidget {
                 height: getHeight(60),
                 width: getWidth(335),
                 child: ElevatedButton(
-                    onPressed: () =>
-                        Navigator.pushNamed(context, '/checkout_page'),
+                    onPressed: ()async {
+                    await  context
+                          .read<ShippingAddressProvider>()
+                          .checkAddressList()
+                          .then((value) => value
+                              ? Navigator.pushNamed(context, '/checkout_page')
+                              : Navigator.pushNamed(
+                                  context, '/shipping_address'));
+                    },
                     child: const Text("Check out")),
               )
             ],

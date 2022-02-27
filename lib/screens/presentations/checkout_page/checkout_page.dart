@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:furniture_app/core/hive/hive_boxes.dart';
 import 'package:furniture_app/core/utils/size_config.dart';
 import 'package:furniture_app/screens/providers/checkout_provider/checkout_provider.dart';
+import 'package:furniture_app/screens/providers/shipping_address_provider/shipping_adress_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -43,7 +44,9 @@ class CheckOutPage extends StatelessWidget {
               children: [
                 CheckoutTitle(
                   title: "Shipping Address",
-                  editFunc: () {},
+                  editFunc: () {
+                    Navigator.pushReplacementNamed(context, '/shipping_address');
+                  },
                 ),
                 CheckOutContainer(
                   height: getHeight(127),
@@ -55,7 +58,11 @@ class CheckOutPage extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 20, vertical: 8.0),
                         child: Text(
-                          "Lazizbek Fayziev",
+                          context
+                              .watch<ShippingAddressProvider>()
+                              .addressModel!
+                              .name
+                              .toString(),
                           style: TextStyle(
                             fontSize: 18,
                             color: Constants.color30,
@@ -70,7 +77,11 @@ class CheckOutPage extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: Text(
-                          "25 rue Robert Latouche, Nice, 06200, Côte D’azur, France",
+                          context
+                              .watch<ShippingAddressProvider>()
+                              .addressModel!
+                              .address
+                              .toString(),
                           style: TextStyle(color: Constants.color80),
                         ),
                       )
@@ -161,9 +172,9 @@ class CheckOutPage extends StatelessWidget {
               height: getHeight(60),
               width: getWidth(335),
               child: ElevatedButton(
-                onPressed: ()async {
-                await  Boxes.getCartItems().clear();
-                context.read<CheckOutProvider>().addDiscount(0);
+                onPressed: () async {
+                  await Boxes.getCartItems().clear();
+                  context.read<CheckOutProvider>().addDiscount(0);
                   Navigator.pushNamed(context, "/payment_completed");
                 },
                 child: const Text("SUBMIT ORDER"),

@@ -7,9 +7,6 @@ class UserInfoService {
   static CollectionReference userCollection =
       FirebaseFirestore.instance.collection("users");
 
-  // static final uid =
-  //     AuthProvider(FirebaseAuth.instance).fireBaseAuth.currentUser!.email;
-
   static addNewUser({
     required BuildContext context,
     required TextEditingController emailConstroller,
