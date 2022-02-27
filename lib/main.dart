@@ -3,6 +3,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:furniture_app/core/hive/hive_boxes.dart';
 import 'package:furniture_app/core/hive/hive_initialize.dart';
+import 'package:furniture_app/core/services/payment_service/payment_service.dart';
+import 'package:furniture_app/core/services/shipping_address_service/shipping_address_service.dart';
 import 'package:furniture_app/core/utils/router.dart';
 import 'package:furniture_app/core/utils/theme.dart';
 import 'package:furniture_app/screens/providers/auth_provider/auth_provider.dart';
@@ -11,6 +13,7 @@ import 'package:furniture_app/screens/providers/checkout_provider/checkout_provi
 import 'package:furniture_app/screens/providers/furniture_provider/furniture_provider.dart';
 import 'package:furniture_app/screens/providers/home_page_provider/homepage_provider.dart';
 import 'package:furniture_app/screens/providers/isfavorite_provider/is_favorite_provider.dart';
+import 'package:furniture_app/screens/providers/notifications_provider/notification_provider.dart';
 import 'package:furniture_app/screens/providers/payment_provider/payment_provider.dart';
 import 'package:furniture_app/screens/providers/shipping_address_provider/shipping_adress_provider.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -42,14 +45,10 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     // TODO: implement initState
     FurnitureProvider().loadData();
-    // Hive.deleteBoxFromDisk("mebel");
-    // Hive.deleteBoxFromDisk("favorites");
   }
 
-  // @override
-  // void dispose() {
-  //   Hive.close();
-  // }
+  @override
+  void dispose() {}
 
   @override
   Widget build(BuildContext context) {
@@ -68,12 +67,15 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (_) => CheckOutProvider()),
         ChangeNotifierProvider(create: (_) => ShippingAddressProvider()),
         ChangeNotifierProvider(create: (_) => PaymentProvider()),
+        ChangeNotifierProvider(create: (_) => NotificationProvider()),
+        ChangeNotifierProvider(create: (_) => PaymentPageService()),
+        ChangeNotifierProvider(create: (_) => ShippingPageService()),
         ChangeNotifierProvider<AuthProvider>(
           create: (_) => AuthProvider(FirebaseAuth.instance),
         ),
         StreamProvider(
             create: (context) => context.read<AuthProvider>().authChanges,
-            initialData: 0)
+            initialData: 0),
       ],
       child: MaterialApp(
         title: 'Furniture app',

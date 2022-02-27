@@ -29,11 +29,15 @@ class UserInfoService {
           orders: Orders(canceled: [], delivered: [], proccessing: []),
         ).toJson())
         .then(
-          (value) => Navigator.pushNamedAndRemoveUntil(
-            context,
-            "/home_page",
-            (route) => false,
-          ),
+      (value) async {
+        print("hammasi ok");
+
+        Navigator.pushNamedAndRemoveUntil(
+          context,
+          "/home_page",
+          (route) => false,
         );
+      },
+    );
   }
 }

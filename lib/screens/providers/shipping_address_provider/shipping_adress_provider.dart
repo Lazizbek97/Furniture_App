@@ -12,14 +12,13 @@ class ShippingAddressProvider extends ChangeNotifier {
   CollectionReference userCollection =
       FirebaseFirestore.instance.collection("users");
 
-  final uid =
-      AuthProvider(FirebaseAuth.instance).fireBaseAuth.currentUser!.email;
-
+ 
   chooseAsAdress(int index) async {
     checked = index;
     await FirebaseFirestore.instance
         .collection("users")
-        .doc(uid)
+        .doc(
+            AuthProvider(FirebaseAuth.instance).fireBaseAuth.currentUser!.email)
         .get()
         .then((value) {
       addressModel = ShippingAddress.fromJson(
@@ -33,7 +32,7 @@ class ShippingAddressProvider extends ChangeNotifier {
   Future checkAddressList() async {
     await FirebaseFirestore.instance
         .collection("users")
-        .doc(uid)
+        .doc(AuthProvider(FirebaseAuth.instance).fireBaseAuth.currentUser!.email)
         .get()
         .then((value) async {
       (value.data()!['shipping_address'] as List).isNotEmpty

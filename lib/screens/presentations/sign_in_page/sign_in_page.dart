@@ -98,15 +98,17 @@ class SignInPage extends StatelessWidget {
                               .signIn(
                                   email: _emailConstroller.text,
                                   password: _passwordConstroller.text)
-                              .then(
-                                (value) => value == 'signed in'
-                                    ? Navigator.pushNamedAndRemoveUntil(
-                                        context,
-                                        "/home_page",
-                                        (route) => false,
-                                      )
-                                    : SnackBarWidget.show(value, context),
+                              .then((value) async {
+                            if (value == 'signed in') {
+                              Navigator.pushNamedAndRemoveUntil(
+                                context,
+                                "/home_page",
+                                (route) => false,
                               );
+                            } else {
+                              SnackBarWidget.show(value, context);
+                            }
+                          });
                         },
                         child: const Text("Log in"),
                       ),

@@ -5,6 +5,7 @@ import 'package:furniture_app/screens/providers/auth_provider/auth_provider.dart
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/hive/hive_boxes.dart';
 import '../../../core/utils/constants.dart';
 import 'components/account_page_menu.dart';
 
@@ -14,6 +15,7 @@ class AccountPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var user = context.watch<AuthProvider>().fireBaseAuth.currentUser;
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -32,8 +34,11 @@ class AccountPage extends StatelessWidget {
         ),
         actions: [
           IconButton(
-            onPressed: () {
-              context.read<AuthProvider>().signOut();
+            onPressed: () async {
+              // await Boxes.getFavorites().clear();
+              await Boxes.getCartItems().clear();
+              Navigator.pushReplacementNamed(context, "/");
+              await context.read<AuthProvider>().signOut();
             },
             icon: SvgPicture.asset(
               "assets/images/logout.svg",
@@ -60,12 +65,14 @@ class AccountPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      user!.displayName.toString(),
+                      user == null
+                          ? "No Account name"
+                          : user.displayName.toString(),
                       style: const TextStyle(
                           fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     Text(
-                      "ibnshomurod@mail.ru",
+                      user == null ? "No email" : user.email.toString(),
                       style: TextStyle(
                         color: Constants.color80,
                       ),

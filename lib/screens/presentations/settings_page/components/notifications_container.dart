@@ -14,6 +14,7 @@ class NotificationsContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return Container(
       height: getHeight(54),
       width: getWidth(335),

@@ -5,29 +5,17 @@ import 'package:furniture_app/core/models/user_model.dart';
 
 import '../../../screens/providers/auth_provider/auth_provider.dart';
 
-class ShippingPageService {
+class ShippingPageService extends ChangeNotifier {
   static CollectionReference userCollection =
       FirebaseFirestore.instance.collection("users");
-
-  // ? Current User Document
-
-  static final uid =
-      AuthProvider(FirebaseAuth.instance).fireBaseAuth.currentUser!.email;
-  // ? Address list is empty?
-
-  
-
-  // ? ShippingAddress Page Stream
-
-  static final userShippingStream = FirebaseFirestore.instance
-      .collection("users")
-      .doc(uid)
-      .snapshots(includeMetadataChanges: true);
 
   // ? ShppingAddress Page add item
 
   static addItemToShppingAddress(ShippingAddress model) async {
-    await userCollection.doc(uid).update({
+    await userCollection
+        .doc(
+            AuthProvider(FirebaseAuth.instance).fireBaseAuth.currentUser!.email)
+        .update({
       "shipping_address": FieldValue.arrayUnion([model.toJson()])
     });
   }
@@ -35,7 +23,10 @@ class ShippingPageService {
   // ? ShppingAddress Page Delete item
 
   static deleteFromShipping(ShippingAddress model) async {
-    userCollection.doc(uid).update({
+    userCollection
+        .doc(
+            AuthProvider(FirebaseAuth.instance).fireBaseAuth.currentUser!.email)
+        .update({
       "shipping_address": FieldValue.arrayRemove([model.toJson()])
     }).catchError((e) => print(e));
   }
@@ -46,14 +37,20 @@ class ShippingPageService {
       {required ShippingAddress address,
       required TextEditingController name,
       required TextEditingController adressController}) async {
-    await userCollection.doc(uid).update({
+    await userCollection
+        .doc(
+            AuthProvider(FirebaseAuth.instance).fireBaseAuth.currentUser!.email)
+        .update({
       "shipping_address": FieldValue.arrayRemove([address.toJson()])
     }).catchError((e) => print(e));
 
     address.address = adressController.text;
     address.name = name.text;
 
-    await userCollection.doc(uid).update({
+    await userCollection
+        .doc(
+            AuthProvider(FirebaseAuth.instance).fireBaseAuth.currentUser!.email)
+        .update({
       "shipping_address": FieldValue.arrayUnion([address.toJson()])
     }).catchError((e) => print(e));
   }

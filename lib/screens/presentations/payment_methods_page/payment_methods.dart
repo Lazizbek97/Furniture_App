@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:furniture_app/core/models/user_model.dart';
@@ -9,6 +10,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/utils/constants.dart';
+import '../../providers/auth_provider/auth_provider.dart';
 
 class PaymentMethods extends StatelessWidget {
   const PaymentMethods({Key? key}) : super(key: key);
@@ -36,7 +38,13 @@ class PaymentMethods extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         child: StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
-            stream: PaymentPageService.userPaymentStream,
+            stream: FirebaseFirestore.instance
+                .collection("users")
+                .doc(AuthProvider(FirebaseAuth.instance)
+                    .fireBaseAuth
+                    .currentUser!
+                    .email)
+                .snapshots(includeMetadataChanges: true),
             builder: (BuildContext context,
                 AsyncSnapshot<DocumentSnapshot<Map<String, dynamic>>> snap) {
               if (snap.hasError) {

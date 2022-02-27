@@ -12,14 +12,12 @@ class PaymentProvider extends ChangeNotifier {
   CollectionReference userCollection =
       FirebaseFirestore.instance.collection("users");
 
-  final uid =
-      AuthProvider(FirebaseAuth.instance).fireBaseAuth.currentUser!.email;
-
+  
   chooseAsPaymentMethod(int index) async {
     checked = index;
     await FirebaseFirestore.instance
         .collection("users")
-        .doc(uid)
+        .doc(AuthProvider(FirebaseAuth.instance).fireBaseAuth.currentUser!.email)
         .get()
         .then((value) {
       paymentModel = PaymentMethod.fromJson(
@@ -33,7 +31,7 @@ class PaymentProvider extends ChangeNotifier {
   Future checkPaymentMethodList() async {
     await FirebaseFirestore.instance
         .collection("users")
-        .doc(uid)
+        .doc(AuthProvider(FirebaseAuth.instance).fireBaseAuth.currentUser!.email)
         .get()
         .then((value) async {
       (value.data()!['payment_methods'] as List).isNotEmpty

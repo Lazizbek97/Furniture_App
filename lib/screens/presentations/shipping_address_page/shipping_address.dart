@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:furniture_app/core/models/user_model.dart';
-import 'package:furniture_app/core/services/shipping_address_service/shipping_address_service.dart';
 import 'package:furniture_app/core/utils/size_config.dart';
 import 'package:furniture_app/screens/presentations/shipping_address_page/components/editing_address.dart';
 import 'package:furniture_app/screens/providers/shipping_address_provider/shipping_adress_provider.dart';
@@ -10,6 +10,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/utils/constants.dart';
+import '../../providers/auth_provider/auth_provider.dart';
 
 class ShippingAddressPage extends StatelessWidget {
   const ShippingAddressPage({Key? key}) : super(key: key);
@@ -39,7 +40,13 @@ class ShippingAddressPage extends StatelessWidget {
           horizontal: 20,
         ),
         child: StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
-          stream: ShippingPageService.userShippingStream,
+          stream: FirebaseFirestore.instance
+              .collection("users")
+              .doc(AuthProvider(FirebaseAuth.instance)
+                  .fireBaseAuth
+                  .currentUser!
+                  .email)
+              .snapshots(includeMetadataChanges: true),
           builder: (BuildContext context,
               AsyncSnapshot<DocumentSnapshot<Map<String, dynamic>>> snap) {
             if (snap.hasError) {
@@ -80,7 +87,6 @@ class ShippingAddressPage extends StatelessWidget {
                                               __
                                           ? true
                                           : false,
-                                          
                                       checkColor: Colors.white,
                                       activeColor: Constants.color30,
                                       shape: RoundedRectangleBorder(
