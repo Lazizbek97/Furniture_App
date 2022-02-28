@@ -63,6 +63,7 @@ class ItemCard extends StatelessWidget {
                                 .read<CartProvider>()
                                 .addCartPage(item, item.name!);
                           }
+                          context.read<CartProvider>().checkBox();
                         },
                         child: cartItems.containsKey(item.name)
                             ? BagButton(

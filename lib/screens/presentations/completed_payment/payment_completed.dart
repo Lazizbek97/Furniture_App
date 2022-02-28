@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:furniture_app/core/utils/constants.dart';
 import 'package:furniture_app/core/utils/size_config.dart';
+import 'package:provider/provider.dart';
+
+import '../../providers/cart_provider/cart_provider.dart';
 
 class PaymentCompleted extends StatelessWidget {
   const PaymentCompleted({Key? key}) : super(key: key);
@@ -64,8 +67,12 @@ class PaymentCompleted extends StatelessWidget {
                 height: getHeight(60),
                 width: getWidth(315),
                 child: ElevatedButton(
-                  onPressed: () => Navigator.pushNamedAndRemoveUntil(
-                      context, "/home_page", (route) => false),
+                  onPressed: () {
+                    context.read<CartProvider>().checkBox();
+
+                    Navigator.pushNamedAndRemoveUntil(
+                        context, "/home_page", (route) => false);
+                  },
                   child: Text(
                     "BACK TO HOME",
                     style: TextStyle(

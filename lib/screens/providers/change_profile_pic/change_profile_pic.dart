@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -9,22 +8,12 @@ import 'package:flutter/foundation.dart';
 import '../auth_provider/auth_provider.dart';
 
 class ChangeProfilePicture extends ChangeNotifier {
-  CollectionReference users = FirebaseFirestore.instance.collection("users");
-  // late Stream<QuerySnapshot> _usersStream = FirebaseFirestore.instance
-  //     .collection("users")
-  //     .snapshots(includeMetadataChanges: true);
-
   File? file;
 
   String? profilePicLink =
       AuthProvider(FirebaseAuth.instance).fireBaseAuth.currentUser!.photoURL;
 
   Future uploadPicture() async {
-    // _usersStream = FirebaseFirestore.instance
-    //     .collection("users")
-    //     .snapshots(includeMetadataChanges: true);
-    // notifyListeners();
-
     final filePicker = await FilePicker.platform.pickFiles(
       allowMultiple: false,
     );
@@ -66,6 +55,4 @@ class ChangeProfilePicture extends ChangeNotifier {
       print("Xatoo: $e");
     }
   }
-
-
 }

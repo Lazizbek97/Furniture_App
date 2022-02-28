@@ -16,6 +16,7 @@ import '../../providers/cart_provider/cart_provider.dart';
 import '../../providers/home_page_provider/homepage_provider.dart';
 import 'components/item_card.dart';
 import 'components/menu_button.dart';
+import 'package:badges/badges.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -143,8 +144,18 @@ class HomePageBody extends StatelessWidget {
 
                       Navigator.pushNamed(context, "/cart_page");
                     },
-                    icon: SvgPicture.asset(
-                      Constants.cartImage,
+                    icon: Badge(
+                      animationType: BadgeAnimationType.slide,
+                      badgeContent: Text(
+                        context.watch<CartProvider>().numCartItems.toString(),
+                        style: TextStyle(color: Colors.white, fontSize: 10),
+                      ),
+                      badgeColor: Color(0xffEB5757),
+                      position: BadgePosition(top: -14, end: -5),
+                      showBadge: context.watch<CartProvider>().cartNotEmpty,
+                      child: SvgPicture.asset(
+                        Constants.cartImage,
+                      ),
                     ),
                   ),
                 ],

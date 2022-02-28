@@ -10,12 +10,22 @@ class CartProvider extends ChangeNotifier {
   int modelCount = 1;
   double total = 0;
 
+  bool cartNotEmpty = Boxes.getCartItems().values.length == 0?false:true;
+  int numCartItems = Boxes.getCartItems().values.length;
+
+  checkBox() async {
+    cartItems.values.length == 0 ? cartNotEmpty = false : cartNotEmpty = true;
+    numCartItems = cartItems.values.length;
+    notifyListeners();
+  }
+
   totalSum({double discount = 0}) {
     total = 0;
     cartItems.values.toList().forEach((element) {
       total = total + (element.price! * element.count!);
     });
     total = double.parse((total - discount).toStringAsFixed(3));
+    numCartItems = cartItems.values.length;
 
     notifyListeners();
   }
@@ -24,6 +34,8 @@ class CartProvider extends ChangeNotifier {
     model.count = model.count! + 1;
 
     modelCount = model.count!;
+    numCartItems = cartItems.values.length;
+
     notifyListeners();
   }
 
@@ -32,17 +44,24 @@ class CartProvider extends ChangeNotifier {
       model.count = model.count! - 1;
     }
     modelCount = model.count!;
+    numCartItems = cartItems.values.length;
 
     notifyListeners();
   }
 
   addCartPage(Item model, String key) async {
     await cartItems.put(key, model);
+    numCartItems = cartItems.values.length;
+    cartItems.values.length == 0 ? cartNotEmpty = false : cartNotEmpty = true;
+
     notifyListeners();
   }
 
   deleteFromCartPage(String key) async {
     await cartItems.delete(key);
+    numCartItems = cartItems.values.length;
+    cartItems.values.length == 0 ? cartNotEmpty = false : cartNotEmpty = true;
+
     notifyListeners();
   }
 }
