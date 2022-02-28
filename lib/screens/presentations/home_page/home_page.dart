@@ -6,6 +6,7 @@ import 'package:furniture_app/core/utils/size_config.dart';
 import 'package:furniture_app/screens/presentations/account_page/account_page.dart';
 import 'package:furniture_app/screens/presentations/favorites_page/favorites.dart';
 import 'package:furniture_app/screens/presentations/notifications_page/notifications_page.dart';
+import 'package:furniture_app/screens/presentations/search_page/search_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
@@ -107,7 +108,13 @@ class HomePageBody extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      await showSearch(
+                        context: context,
+                        delegate: SearchPage(),
+                        query: "search...",
+                      );
+                    },
                     icon: SvgPicture.asset(
                       Constants.searchImage,
                     ),

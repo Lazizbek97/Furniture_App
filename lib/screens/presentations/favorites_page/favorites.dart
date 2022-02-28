@@ -10,6 +10,7 @@ import '../../../core/models/furniture_model.dart';
 import '../../../core/utils/constants.dart';
 import '../../../core/utils/size_config.dart';
 import '../../providers/isfavorite_provider/is_favorite_provider.dart';
+import '../search_page/search_page.dart';
 
 class FavoritesPage extends StatelessWidget {
   const FavoritesPage({Key? key}) : super(key: key);
@@ -21,7 +22,13 @@ class FavoritesPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          onPressed: () {},
+          onPressed: () async {
+            await showSearch(
+              context: context,
+              delegate: SearchPage(),
+              query: "search...",
+            );
+          },
           icon: SvgPicture.asset(
             Constants.searchImage,
           ),

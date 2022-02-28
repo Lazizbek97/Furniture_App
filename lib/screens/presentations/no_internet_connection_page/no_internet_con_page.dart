@@ -6,7 +6,15 @@ class NoInternetConnectionPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(child: Text("No Internet Connection")),
+      body: Container(
+          height: double.infinity,
+          width: double.infinity,
+          color: Color(0xffF7F7F7),
+          child: Center(
+              child: Image.asset(
+            "assets/images/nointernet.gif",
+            fit: BoxFit.cover,
+          ))),
     );
   }
 }

@@ -24,5 +24,6 @@ class HiveInitialize {
     Hive.registerAdapter(CanceledAdapter());
     Hive.registerAdapter(PaymentMethodAdapter());
     Hive.registerAdapter(ShippingAddressAdapter());
+    Hive.registerAdapter(NotificationModelAdapter());
   }
 }

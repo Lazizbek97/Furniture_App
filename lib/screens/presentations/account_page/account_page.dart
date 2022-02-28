@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:furniture_app/core/utils/size_config.dart';
 import 'package:furniture_app/screens/providers/auth_provider/auth_provider.dart';
+import 'package:furniture_app/screens/providers/change_profile_pic/change_profile_pic.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/hive/hive_boxes.dart';
 import '../../../core/utils/constants.dart';
+import '../search_page/search_page.dart';
 import 'components/account_page_menu.dart';
 
 class AccountPage extends StatelessWidget {
@@ -19,7 +21,13 @@ class AccountPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          onPressed: () {},
+          onPressed: () async {
+            await showSearch(
+              context: context,
+              delegate: SearchPage(),
+              query: "search...",
+            );
+          },
           icon: SvgPicture.asset(
             Constants.searchImage,
           ),
@@ -53,10 +61,40 @@ class AccountPage extends StatelessWidget {
           children: [
             Row(
               children: [
-                CircleAvatar(
-                  radius: getHeight(40),
-                  backgroundImage:
-                      const AssetImage("assets/images/profile_pic.png"),
+                Stack(
+                  children: [
+                    CircleAvatar(
+                      radius: getHeight(40),
+                      backgroundColor: Colors.white,
+                      backgroundImage: AssetImage("assets/images/loading.gif"),
+                      child: Container(
+                        height: getHeight(90),
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                fit: BoxFit.cover,
+                                image: NetworkImage(context
+                                    .watch<ChangeProfilePicture>()
+                                    .profilePicLink
+                                    .toString())),
+                            borderRadius: BorderRadius.circular(50)),
+                      ),
+                    ),
+                    Positioned(
+                      bottom: -5,
+                      right: -8,
+                      child: IconButton(
+                          onPressed: () async {
+                            await context
+                                .read<ChangeProfilePicture>()
+                                .uploadPicture();
+                          },
+                          padding: EdgeInsets.all(0),
+                          icon: Icon(
+                            Icons.add_a_photo_outlined,
+                            color: Colors.white,
+                          )),
+                    ),
+                  ],
                 ),
                 SizedBox(
                   width: getWidth(20),

@@ -23,7 +23,7 @@ class UserModelAdapter extends TypeAdapter<UserModel> {
       image: fields[3] as String?,
       myCart: (fields[4] as List?)?.cast<dynamic>(),
       favorites: (fields[5] as List?)?.cast<dynamic>(),
-      notifications: (fields[6] as List?)?.cast<dynamic>(),
+      notifications: (fields[6] as List?)?.cast<NotificationModel>(),
       myReviews: (fields[7] as List?)?.cast<MyReview>(),
       paymentMethods: (fields[8] as List?)?.cast<PaymentMethod>(),
       shippingAddress: (fields[9] as List?)?.cast<ShippingAddress>(),
@@ -290,6 +290,49 @@ class ShippingAddressAdapter extends TypeAdapter<ShippingAddress> {
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is ShippingAddressAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+class NotificationModelAdapter extends TypeAdapter<NotificationModel> {
+  @override
+  final int typeId = 9;
+
+  @override
+  NotificationModel read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return NotificationModel(
+      title: fields[0] as String?,
+      image: fields[1] as String?,
+      disc: fields[2] as String?,
+      category: fields[3] as String?,
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, NotificationModel obj) {
+    writer
+      ..writeByte(4)
+      ..writeByte(0)
+      ..write(obj.title)
+      ..writeByte(1)
+      ..write(obj.image)
+      ..writeByte(2)
+      ..write(obj.disc)
+      ..writeByte(3)
+      ..write(obj.category);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is NotificationModelAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

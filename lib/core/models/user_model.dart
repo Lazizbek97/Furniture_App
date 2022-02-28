@@ -42,7 +42,7 @@ class UserModel {
   @HiveField(5)
   List<dynamic>? favorites;
   @HiveField(6)
-  List<dynamic>? notifications;
+  List<NotificationModel>? notifications;
   @HiveField(7)
   List<MyReview>? myReviews;
   @HiveField(8)
@@ -59,7 +59,7 @@ class UserModel {
         image: json["image"],
         myCart: List<dynamic>.from(json["my_cart"].map((x) => x)),
         favorites: List<dynamic>.from(json["favorites"].map((x) => x)),
-        notifications: List<dynamic>.from(json["notifications"].map((x) => x)),
+        notifications: List<NotificationModel>.from(json["notifications"].map((x) => x)),
         myReviews: List<MyReview>.from(
             json["my_reviews"].map((x) => MyReview.fromJson(x))),
         paymentMethods: List<PaymentMethod>.from(
@@ -262,5 +262,38 @@ class ShippingAddress {
         "country": country,
         "city": city,
         "district": district,
+      };
+}
+
+@HiveType(typeId: 9)
+class NotificationModel {
+  NotificationModel({
+    this.title,
+    this.image,
+    this.disc,
+    this.category,
+  });
+  @HiveField(0)
+  String? title;
+  @HiveField(1)
+  String? image;
+  @HiveField(2)
+  String? disc;
+  @HiveField(3)
+  String? category;
+
+  factory NotificationModel.fromJson(Map<String, dynamic> json) =>
+      NotificationModel(
+        title: json["title"],
+        image: json["image"],
+        disc: json["disc"],
+        category: json["category"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "title": title,
+        "image": image,
+        "disc": disc,
+        "category": category,
       };
 }

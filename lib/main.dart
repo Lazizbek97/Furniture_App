@@ -12,6 +12,7 @@ import 'package:furniture_app/core/utils/theme.dart';
 import 'package:furniture_app/screens/presentations/no_internet_connection_page/no_internet_con_page.dart';
 import 'package:furniture_app/screens/providers/auth_provider/auth_provider.dart';
 import 'package:furniture_app/screens/providers/cart_provider/cart_provider.dart';
+import 'package:furniture_app/screens/providers/change_profile_pic/change_profile_pic.dart';
 import 'package:furniture_app/screens/providers/checkout_provider/checkout_provider.dart';
 import 'package:furniture_app/screens/providers/furniture_provider/furniture_provider.dart';
 import 'package:furniture_app/screens/providers/home_page_provider/homepage_provider.dart';
@@ -88,6 +89,7 @@ class _MyAppState extends State<MyApp> {
               ChangeNotifierProvider(create: (_) => NotificationProvider()),
               ChangeNotifierProvider(create: (_) => PaymentPageService()),
               ChangeNotifierProvider(create: (_) => ShippingPageService()),
+              ChangeNotifierProvider(create: (_) => ChangeProfilePicture()),
               ChangeNotifierProvider<AuthProvider>(
                 create: (_) => AuthProvider(FirebaseAuth.instance),
               ),
