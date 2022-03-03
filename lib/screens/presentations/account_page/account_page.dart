@@ -8,7 +8,6 @@ import 'package:provider/provider.dart';
 
 import '../../../core/hive/hive_boxes.dart';
 import '../../../core/utils/constants.dart';
-import '../search_page/search_page.dart';
 import 'components/account_page_menu.dart';
 
 class AccountPage extends StatelessWidget {
@@ -22,11 +21,10 @@ class AccountPage extends StatelessWidget {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () async {
-            await showSearch(
-              context: context,
-              delegate: SearchPage(),
-              query: "search...",
-            );
+            // await showSearch(
+            //   context: context,
+            //   delegate: SearchPage(),
+            // );
           },
           icon: SvgPicture.asset(
             Constants.searchImage,
@@ -54,7 +52,6 @@ class AccountPage extends StatelessWidget {
           ),
         ],
       ),
-      
       body: SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: getWidth(20)),
@@ -69,7 +66,8 @@ class AccountPage extends StatelessWidget {
                       CircleAvatar(
                         radius: getHeight(40),
                         backgroundColor: Colors.white,
-                        backgroundImage: AssetImage("assets/images/loading.gif"),
+                        backgroundImage:
+                            AssetImage("assets/images/loading.gif"),
                         child: Container(
                           height: getHeight(90),
                           decoration: BoxDecoration(
@@ -160,7 +158,7 @@ class AccountPage extends StatelessWidget {
                   subtitle: "Notification, Password, FAQ, Contact",
                 ),
               ),
-               InkWell(
+              InkWell(
                 onTap: () => Navigator.pushNamed(context, "/about_me"),
                 child: const AccoutPageMenus(
                   title: "About me",

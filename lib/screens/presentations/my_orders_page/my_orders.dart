@@ -47,7 +47,9 @@ class _MyOrdersPageState extends State<MyOrdersPage>
           TabBar(
             controller: _controller,
             labelColor: Colors.black,
+
             unselectedLabelColor: Constants.color90,
+            indicatorColor: Colors.black,
             labelStyle: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
@@ -61,6 +63,7 @@ class _MyOrdersPageState extends State<MyOrdersPage>
               ),
               Tab(
                 child: Text("Processing"),
+
               ),
               Tab(
                 child: Text("Cancel"),

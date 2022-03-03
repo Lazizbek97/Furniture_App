@@ -30,7 +30,6 @@ class UserInfoService {
         ).toJson())
         .then(
       (value) async {
-        print("hammasi ok");
 
         Navigator.pushNamedAndRemoveUntil(
           context,

@@ -8,7 +8,6 @@ class FurnitureProvider extends ChangeNotifier {
   Box<FurnitureModel> models = Boxes.getMebel();
 
   Future<Box<FurnitureModel>> loadData() async {
-    print("Data box bo'shmi: ${models.isEmpty}");
     if (models.isEmpty) {
       List<FurnitureModel> data = await FurnitureService.fetchData();
       for (FurnitureModel item in data) {
@@ -19,5 +18,3 @@ class FurnitureProvider extends ChangeNotifier {
     return models;
   }
 }
-
-

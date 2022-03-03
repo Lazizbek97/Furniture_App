@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 import '../../../../core/utils/constants.dart';
@@ -11,7 +13,7 @@ class CanceledCards extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: 10,
+      itemCount: 5,
       itemBuilder: ((context, index) {
         return Container(
           height: getHeight(172),
@@ -65,7 +67,7 @@ class CanceledCards extends StatelessWidget {
                               "Quntity:  ",
                             ),
                             Text(
-                              "3",
+                              (Random().nextInt(10)+1).toString(),
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: Constants.semiBold,
@@ -77,7 +79,7 @@ class CanceledCards extends StatelessWidget {
                           children: [
                             const Text("Total Amount:  "),
                             Text(
-                              "\$ 150",
+                              "\$ ${(Random().nextInt(10)+45)}",
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: Constants.semiBold,

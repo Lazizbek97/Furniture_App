@@ -13,6 +13,7 @@ import 'package:furniture_app/screens/presentations/my_orders_page/my_orders.dar
 import 'package:furniture_app/screens/presentations/my_reviews_page/my_reviews_page.dart';
 import 'package:furniture_app/screens/presentations/payment_methods_page/payment_methods.dart';
 import 'package:furniture_app/screens/presentations/rating_reviews/rating_reviews.dart';
+import 'package:furniture_app/screens/presentations/search_page/details_search_result.dart';
 import 'package:furniture_app/screens/presentations/settings_page/settings_page.dart';
 import 'package:furniture_app/screens/presentations/shipping_address_page/shipping_address.dart';
 import 'package:furniture_app/screens/providers/auth_provider/auth_provider.dart';
@@ -20,6 +21,7 @@ import 'package:provider/provider.dart';
 
 import '../../screens/presentations/sign_in_page/sign_in_page.dart';
 import '../../screens/presentations/sign_up_page/sing_up_page.dart';
+import '../models/furniture_model.dart';
 
 class RouteGenerator {
   Route? routeGenerate(RouteSettings settings) {
@@ -68,9 +70,11 @@ class RouteGenerator {
       case '/adding_payment_method':
         return MaterialPageRoute(builder: (_) => AddingPaymentMethodPage());
       case '/settings_page':
-        return MaterialPageRoute(builder: (_) => const SettingsPage());
+        return MaterialPageRoute(builder: (_) => const SettingsPage());//
       case '/about_me':
         return MaterialPageRoute(builder: (_) =>  AboutMe());
+          case '/details_search_result':
+        return MaterialPageRoute(builder: (_) =>  DetailsSearchResult(itemModel: args as Item,));
     }
     return null;
   }

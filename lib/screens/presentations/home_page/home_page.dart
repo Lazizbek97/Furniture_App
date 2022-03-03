@@ -114,7 +114,6 @@ class HomePageBody extends StatelessWidget {
                       await showSearch(
                         context: context,
                         delegate: SearchPage(),
-                        query: "search...",
                       );
                     },
                     icon: SvgPicture.asset(

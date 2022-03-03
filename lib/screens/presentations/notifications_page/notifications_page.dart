@@ -26,11 +26,10 @@ class _NotificationsPageState extends State<NotificationsPage> {
         appBar: AppBar(
           leading: IconButton(
             onPressed: () async {
-              await showSearch(
-                context: context,
-                delegate: SearchPage(),
-                query: "search...",
-              );
+              // await showSearch(
+              //   context: context,
+              //   delegate: SearchPage(),
+              // );
             },
             icon: SvgPicture.asset(
               Constants.searchImage,

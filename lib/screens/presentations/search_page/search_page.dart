@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:provider/provider.dart';
 
+import '../../../core/models/furniture_model.dart';
+import '../../../core/utils/constants.dart';
 import '../../../core/utils/size_config.dart';
+import '../../../core/widgets/barbutton.dart';
+import '../../providers/cart_provider/cart_provider.dart';
 
 class SearchPage extends SearchDelegate {
   @override
@@ -32,23 +38,119 @@ class SearchPage extends SearchDelegate {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    var suggestions = [].where((element) {
+    List<Item> suggestionsList = [];
+    Box<Item> cartItems =
+        Provider.of<CartProvider>(context, listen: true).cartItems;
+
+    var FMList = context.watch<Box<FurnitureModel>>().values.toList();
+    for (var item in FMList) {
+      for (var i in item.items!) {
+        suggestionsList.add(i);
+      }
+    }
+
+    var suggestions = suggestionsList.where((element) {
       final result = element.name!.toLowerCase().toString();
       final input = query.toLowerCase().toString();
       return result.contains(input);
     }).toList();
-    // TODO: implement buildSuggestions
-    return ListView.builder(
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: getWidth(15), vertical: getHeight(10)),
+      child: ListView.separated(
         itemCount: suggestions.length,
-        itemBuilder: (context, index) {
-          return ListTile(
-            onTap: () {
-              query = suggestions[index].name!;
-
-              showResults(context);
-            },
-            title: Text(suggestions[index].name!),
-          );
-        });
+        separatorBuilder: (c, i) => Divider(
+          color: Constants.dividerColor,
+        ),
+        itemBuilder: (__, _) => InkWell(
+          onTap: () => Navigator.pushNamed(context, "/details_search_result", arguments: suggestions[_]),
+          child: Container(
+            height: getHeight(100),
+            width: double.infinity,
+            margin: const EdgeInsets.symmetric(vertical: 5),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Container(
+                      height: getHeight(100),
+                      width: getHeight(100),
+                      margin: EdgeInsets.only(right: getWidth(20)),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: AssetImage(suggestions[_].img![0].toString()),
+                        ),
+                      ),
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          suggestions[_].name.toString(),
+                          style: TextStyle(
+                              color: const Color(0xff999999),
+                              fontWeight: Constants.semiBold),
+                        ),
+                        SizedBox(
+                          height: getHeight(10),
+                        ),
+                        Text(
+                          "\$ ${suggestions[_].price}",
+                          style: TextStyle(
+                            fontWeight: Constants.bold,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    InkWell(
+                      onTap: () async {
+                        if (cartItems.containsKey(suggestions[_].name)) {
+                          await context
+                              .read<CartProvider>()
+                              .deleteFromCartPage(suggestions[_].name!);
+                        } else {
+                          await context
+                              .read<CartProvider>()
+                              .addCartPage(suggestions[_], suggestions[_].name!);
+                        }
+                      },
+                      child: cartItems.containsKey(suggestions[_].name.toString())
+                          ? BagButton(
+                              color: Colors.yellow,
+                            )
+                          : BagButton(color: Colors.white),
+                    )
+                  ],
+                )
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+    ;
   }
 }
+
+//  ListView.builder(
+//         itemCount: suggestions.length,
+//         itemBuilder: (context, index) {
+//           return ListTile(
+//             onTap: () {
+//               query = suggestions[index];
+
+//               showResults(context);
+//             },
+//             title: Text(suggestions[index]),
+//           );
+//         });
