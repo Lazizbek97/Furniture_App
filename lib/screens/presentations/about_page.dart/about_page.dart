@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:furniture_app/core/hive/hive_boxes.dart';
 import 'package:furniture_app/core/utils/constants.dart';
 import 'package:furniture_app/core/utils/size_config.dart';
+import 'package:furniture_app/screens/providers/color_picker_provider/color_picker_provider.dart';
 import 'package:furniture_app/screens/providers/isfavorite_provider/is_favorite_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
@@ -11,8 +11,10 @@ import 'package:provider/provider.dart';
 import '../../../core/models/furniture_model.dart';
 import '../../providers/cart_provider/cart_provider.dart';
 import '../../providers/home_page_provider/homepage_provider.dart';
+import 'components/bookmark_part.dart';
 import 'components/color_picker.dart';
 import 'components/plus_minus_item.dart';
+import 'components/ratings_part.dart';
 
 class AboutPage extends StatelessWidget {
   AboutPage({Key? key, required this.index}) : super(key: key);
@@ -90,25 +92,35 @@ class AboutPage extends StatelessWidget {
                         height: getHeight(192),
                         width: getWidth(64),
                         margin: EdgeInsets.only(top: getHeight(96)),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            ColorChekcer(
-                              child: const Text(""),
-                              color: Colors.white,
-                            ),
-                            ColorChekcer(
-                              child: const Icon(
-                                Icons.check,
-                                color: Colors.black,
+                        child: ListView.separated(
+                          itemCount: 3,
+                          separatorBuilder: (context, i) {
+                            return SizedBox(
+                              height: getHeight(15.0),
+                            );
+                          },
+                          itemBuilder: ((context, index) {
+                            return InkWell(
+                              onTap: () {
+                                context.read<ColorPicker>().changeColor(index);
+                              },
+                              child: ColorChekcer(
+                                child:
+                                    context.watch<ColorPicker>().colorIndex ==
+                                            index
+                                        ? const Icon(
+                                            Icons.check,
+                                            color: Colors.black,
+                                          )
+                                        : const Text(""),
+                                color: index == 0
+                                    ? Colors.white
+                                    : index == 1
+                                        ? const Color(0xffB4916C)
+                                        : const Color(0xffE4CBAD),
                               ),
-                              color: const Color(0xffB4916C),
-                            ),
-                            ColorChekcer(
-                              child: const Text(""),
-                              color: const Color(0xffE4CBAD),
-                            ),
-                          ],
+                            );
+                          }),
                         ),
                         decoration: BoxDecoration(
                           color: Colors.white,
@@ -138,39 +150,21 @@ class AboutPage extends StatelessWidget {
                       children: [
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             Text(
                               mebels.name.toString(),
                               style: GoogleFonts.gelasio(
-                                fontSize: 24,
+                                fontSize: getHeight(24),
                               ),
                             ),
                             Text(
                               "\$ ${mebels.price}",
                               style: TextStyle(
-                                  fontSize: 30, fontWeight: Constants.bold),
+                                  fontSize: getHeight(30),
+                                  fontWeight: Constants.bold),
                             ),
-                            Row(
-                              children: [
-                                SvgPicture.asset("assets/images/ystar.svg"),
-                                Text(
-                                  "  ${mebels.ratings}  ",
-                                  style: TextStyle(
-                                      fontSize: 18, fontWeight: Constants.bold),
-                                ),
-                                TextButton(
-                                  onPressed: () => Navigator.pushNamed(
-                                      context, "/review_ratings",
-                                      arguments: index),
-                                  child: Text(
-                                    "(${mebels.reviews!.length} reviews)",
-                                    style: TextStyle(
-                                        color: Constants.color30,
-                                        decoration: TextDecoration.underline),
-                                  ),
-                                ),
-                              ],
-                            )
+                            RatingsPart(mebels: mebels, index: index)
                           ],
                         ),
                         Consumer<CartProvider>(
@@ -242,19 +236,8 @@ class AboutPage extends StatelessWidget {
                                   .addFavorites(mebels, mebels.name!);
                             }
                           },
-                          child: Container(
-                            height: getHeight(60),
-                            width: getHeight(60),
-                            padding: const EdgeInsets.all(15.0),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                color: const Color(0xffF0F0F0)),
-                            child: favorites.containsKey(mebels.name)
-                                ? SvgPicture.asset(
-                                    "assets/images/bookmark_filled.svg")
-                                : SvgPicture.asset(
-                                    "assets/images/bookmark.svg"),
-                          ),
+                          child: BookmarkPart(
+                              favorites: favorites, mebels: mebels),
                         ),
                         SizedBox(
                           height: getHeight(60),

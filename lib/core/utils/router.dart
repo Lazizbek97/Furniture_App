@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:furniture_app/screens/presentations/about_me_page/about_me_page.dart';
 import 'package:furniture_app/screens/presentations/about_page.dart/about_page.dart';
 import 'package:furniture_app/screens/presentations/add_payment_method/adding_payment_method.dart';
 import 'package:furniture_app/screens/presentations/adding_shipment_address_page/adding_shipment.dart';
@@ -68,6 +69,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => AddingPaymentMethodPage());
       case '/settings_page':
         return MaterialPageRoute(builder: (_) => const SettingsPage());
+      case '/about_me':
+        return MaterialPageRoute(builder: (_) =>  AboutMe());
     }
     return null;
   }

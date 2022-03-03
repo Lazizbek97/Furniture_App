@@ -10,6 +10,7 @@ class TextInputField extends StatelessWidget {
     required this.hintText,
     required this.backColor,
     required this.borderColor,
+    required this.keyboarfType,
   }) : super(key: key);
 
   TextEditingController controller;
@@ -17,6 +18,7 @@ class TextInputField extends StatelessWidget {
   String hintText;
   Color backColor;
   Color borderColor;
+  TextInputType keyboarfType;
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +43,7 @@ class TextInputField extends StatelessWidget {
           ),
           TextFormField(
             controller: controller,
+            keyboardType: keyboarfType,
             decoration: InputDecoration(
               focusedBorder: const UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.transparent)),

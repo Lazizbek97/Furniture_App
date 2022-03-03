@@ -67,7 +67,7 @@ class MyReviewsPage extends StatelessWidget {
                         borderRadius: BorderRadius.circular(15),
                         image: const DecorationImage(
                           fit: BoxFit.cover,
-                          image: AssetImage("assets/images/minimalstand.png"),
+                          image: AssetImage("assets/images/furnitures/lamps/lamp1.jpg"),
                         ),
                       ),
                     ),
@@ -83,7 +83,7 @@ class MyReviewsPage extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          "\$ 50.00",
+                          "\$ ${50.00 - _ *5}",
                           style: TextStyle(
                             fontSize: 16,
                             color: Constants.color30,

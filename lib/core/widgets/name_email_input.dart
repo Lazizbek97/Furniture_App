@@ -18,6 +18,7 @@ class EmailNameInput extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: _constroller,
+      keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
         labelText: _hintText,
         labelStyle: TextStyle(

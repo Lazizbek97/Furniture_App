@@ -122,6 +122,7 @@ class AddingPaymentMethodPage extends StatelessWidget {
                     ),
                     TextInputField(
                       controller: _nameController,
+                      keyboarfType: TextInputType.name,
                       title: "Card Holder Name",
                       hintText: "Ex: Lazizbek Fayziev",
                       backColor: const Color(0xffF5F5F5),
@@ -129,6 +130,7 @@ class AddingPaymentMethodPage extends StatelessWidget {
                     ),
                     TextInputField(
                       controller: _cardNumberController,
+                      keyboarfType: TextInputType.number,
                       title: "Card Numner",
                       hintText: "**** **** **** 3456",
                       backColor: Colors.white,
@@ -140,6 +142,7 @@ class AddingPaymentMethodPage extends StatelessWidget {
                         SizedBox(
                           width: getWidth(157),
                           child: TextInputField(
+                            keyboarfType: TextInputType.number,
                             controller: _scvNumberController,
                             title: "CVV",
                             hintText: "Ex: 123",
@@ -151,6 +154,7 @@ class AddingPaymentMethodPage extends StatelessWidget {
                           width: getWidth(157),
                           child: TextInputField(
                             controller: _expiryController,
+                            keyboarfType: TextInputType.number,
                             title: "Epiration Date",
                             hintText: "03/22",
                             backColor: Colors.white,
@@ -168,8 +172,8 @@ class AddingPaymentMethodPage extends StatelessWidget {
                   height: getHeight(60),
                   width: getWidth(335),
                   child: ElevatedButton(
-                    onPressed: ()async {
-                     await PaymentPageService.addItemToPaymentMethod(
+                    onPressed: () async {
+                      await PaymentPageService.addItemToPaymentMethod(
                         cardNumber: _cardNumberController,
                         expirationDate: _expiryController,
                         cvvCode: _scvNumberController,

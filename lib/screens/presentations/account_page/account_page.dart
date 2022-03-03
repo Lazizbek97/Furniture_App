@@ -54,6 +54,7 @@ class AccountPage extends StatelessWidget {
           ),
         ],
       ),
+      
       body: Container(
         padding: EdgeInsets.symmetric(horizontal: getWidth(20)),
         child: Column(
@@ -71,11 +72,14 @@ class AccountPage extends StatelessWidget {
                         height: getHeight(90),
                         decoration: BoxDecoration(
                             image: DecorationImage(
-                                fit: BoxFit.cover,
-                                image: NetworkImage(context
+                              fit: BoxFit.cover,
+                              image: NetworkImage(
+                                context
                                     .watch<ChangeProfilePicture>()
                                     .profilePicLink
-                                    .toString())),
+                                    .toString(),
+                              ),
+                            ),
                             borderRadius: BorderRadius.circular(50)),
                       ),
                     ),
@@ -154,8 +158,15 @@ class AccountPage extends StatelessWidget {
                 subtitle: "Notification, Password, FAQ, Contact",
               ),
             ),
+             InkWell(
+              onTap: () => Navigator.pushNamed(context, "/about_me"),
+              child: const AccoutPageMenus(
+                title: "About me",
+                subtitle: "Information about Developer",
+              ),
+            ),
             SizedBox(
-              height: getHeight(61),
+              height: getHeight(50),
             ),
           ],
         ),

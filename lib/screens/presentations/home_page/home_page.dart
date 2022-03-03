@@ -96,6 +96,7 @@ class HomePageBody extends StatelessWidget {
   Widget build(BuildContext context) {
     var mebels = context.watch<Box<FurnitureModel>>().values;
     var home = context.watch<HomePageProvider>();
+
     print(mebels.isEmpty);
 
     return SafeArea(
@@ -187,8 +188,8 @@ class HomePageBody extends StatelessWidget {
                     ? mebels.toList()[home.menuIndex].items!.length
                     : 5,
                 gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                  maxCrossAxisExtent: 200,
-                  mainAxisExtent: 273,
+                  maxCrossAxisExtent: getWidth(200),
+                  mainAxisExtent: getHeight(273),
                   mainAxisSpacing: getWidth(20),
                 ),
                 itemBuilder: (__, _) => mebels.isNotEmpty
