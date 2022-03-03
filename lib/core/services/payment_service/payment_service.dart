@@ -12,16 +12,16 @@ class PaymentPageService extends ChangeNotifier {
   // ? PaymentMethod Page add item
 
   static addItemToPaymentMethod({
-    required TextEditingController holderName,
-    required TextEditingController cardNumber,
-    required TextEditingController cvvCode,
-    required TextEditingController expirationDate,
+    required String holderName,
+    required String cardNumber,
+    required String cvvCode,
+    required String expirationDate,
   }) async {
     PaymentMethod model = PaymentMethod(
-      cardNumber: cardNumber.text,
-      cvvCode: cvvCode.text,
-      expirationDate: expirationDate.text,
-      holderName: holderName.text,
+      cardNumber: cardNumber,
+      cvvCode: cvvCode,
+      expirationDate: expirationDate,
+      holderName: holderName,
     );
     await userCollection
         .doc(

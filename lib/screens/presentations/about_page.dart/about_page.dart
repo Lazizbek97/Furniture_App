@@ -146,7 +146,7 @@ class AboutPage extends StatelessWidget {
                 Positioned(
                   bottom: getHeight(20),
                   right: getWidth(100),
-                  child: SmoothPageIndicator(
+                  child:mebels.img!.length != 1? SmoothPageIndicator(
                       controller: _controller,
                       // PageController
                       count: mebels.img!.length,
@@ -155,7 +155,7 @@ class AboutPage extends StatelessWidget {
                         dotColor: Colors.white,
                         dotHeight: getHeight(6.0),
                       ), // your preferred effect
-                      onDotClicked: (index) {}),
+                      onDotClicked: (index) {}):Text(""),
                 )
               ],
             ),

@@ -107,7 +107,7 @@ class CartPage extends StatelessWidget {
                 child: ElevatedButton(
                     onPressed: () async {
                       final cartItems =
-                          Provider.of<CartProvider>(context, listen: false)
+                        await  Provider.of<CartProvider>(context, listen: false)
                               .cartItems
                               .values
                               .toList();
@@ -116,9 +116,9 @@ class CartPage extends StatelessWidget {
                           ? await context
                               .read<ShippingAddressProvider>()
                               .checkAddressList()
-                              .then((value) {
+                              .then((value)async {
                               if (value) {
-                                context
+                              await  context
                                     .read<PaymentProvider>()
                                     .checkPaymentMethodList()
                                     .then((v) => v
