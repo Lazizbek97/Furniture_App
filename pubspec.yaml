@@ -59,6 +59,7 @@ dependencies:
   font_awesome_flutter: ^9.2.0
   smooth_page_indicator: ^1.0.0+2
   flutter_credit_card: ^3.0.1
+  auto_size_text: ^3.0.0
   
   
 
@@ -124,25 +125,7 @@ flutter:
   #   - family: NunitoSans
   #     fonts:
   #       - asset: assets/fonts/nunito/NunitoSans-Black.ttf
-  #       - asset: assets/fonts/nunito/NunitoSans-Bold.ttf
-  #       - asset: assets/fonts/nunito/NunitoSans-ExtraBold.ttf
-  #       - asset: assets/fonts/nunito/NunitoSans-ExtraLight.ttf
-  #       - asset: assets/fonts/nunito/NunitoSans-Light.ttf
-  #       - asset: assets/fonts/nunito/NunitoSans-Italic.ttf
-  #       - asset: assets/fonts/nunito/NunitoSans-Regular.ttf
-  #       - asset: assets/fonts/nunito/NunitoSans-SemiBold.ttf
-  #   - family: Merriweather
-  #     fonts:
-  #       - asset: assets/fonts/Merriweather/Merriweather-Black.ttf
-  #       - asset: assets/fonts/Merriweather/Merriweather-Bold.ttf
-  #       - asset: assets/fonts/Merriweather/Merriweather-Light.ttf
-  #       - asset: assets/fonts/Merriweather/Merriweather-Regular.ttf
-  #   - family: Gelasio
-  #     fonts:
-  #       - asset: assets/fonts/Gelasio/Gelasio-Bold.ttf
-  #       - asset: assets/fonts/Gelasio/Gelasio-Medium.ttf
-  #       - asset: assets/fonts/Gelasio/Gelasio-Regular.ttf
-  #       - asset: assets/fonts/Gelasio/Gelasio-SemiBold.ttf        
+  #          
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

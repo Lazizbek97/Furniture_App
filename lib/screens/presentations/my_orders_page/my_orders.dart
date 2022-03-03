@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:furniture_app/screens/presentations/my_orders_page/components/canceled_cards.dart';
 import 'package:furniture_app/screens/presentations/my_orders_page/components/processing_cards.dart';
@@ -47,7 +48,6 @@ class _MyOrdersPageState extends State<MyOrdersPage>
           TabBar(
             controller: _controller,
             labelColor: Colors.black,
-
             unselectedLabelColor: Constants.color90,
             indicatorColor: Colors.black,
             labelStyle: const TextStyle(
@@ -57,16 +57,15 @@ class _MyOrdersPageState extends State<MyOrdersPage>
             unselectedLabelStyle: const TextStyle(
               fontSize: 18,
             ),
-            tabs: const [
+            tabs: [
               Tab(
-                child: Text("Delivered"),
+                child: AutoSizeText("Delivered"),
               ),
               Tab(
-                child: Text("Processing"),
-
+                child: AutoSizeText("Processing"),
               ),
               Tab(
-                child: Text("Cancel"),
+                child: AutoSizeText("Cancel"),
               ),
             ],
             onTap: (value) => setState(() {
