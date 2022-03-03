@@ -15,11 +15,13 @@ import 'components/bookmark_part.dart';
 import 'components/color_picker.dart';
 import 'components/plus_minus_item.dart';
 import 'components/ratings_part.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class AboutPage extends StatelessWidget {
   AboutPage({Key? key, required this.index}) : super(key: key);
 
   int index;
+  PageController _controller = PageController();
 
   @override
   Widget build(BuildContext context) {
@@ -47,17 +49,22 @@ class AboutPage extends StatelessWidget {
               children: [
                 Align(
                   alignment: Alignment.centerRight,
-                  child: Container(
+                  child: SizedBox(
                     height: getHeight(455),
                     width: getWidth(323),
-                    decoration: BoxDecoration(
-                      color: Colors.red,
-                      borderRadius: const BorderRadius.only(
-                          bottomLeft: Radius.circular(50)),
-                      image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: AssetImage(mebels.img![0].toString()),
-                      ),
+                    child: PageView.builder(
+                      controller: _controller,
+                      itemCount: mebels.img!.length,
+                      itemBuilder: ((context, index) => Container(
+                            decoration: BoxDecoration(
+                              borderRadius: const BorderRadius.only(
+                                  bottomLeft: Radius.circular(50)),
+                              image: DecorationImage(
+                                fit: BoxFit.cover,
+                                image: AssetImage(mebels.img![index].toString()),
+                              ),
+                            ),
+                          )),
                     ),
                   ),
                 ),
@@ -136,6 +143,20 @@ class AboutPage extends StatelessWidget {
                     ],
                   ),
                 ),
+                Positioned(
+                  bottom: getHeight(20),
+                  right: getWidth(100),
+                  child: SmoothPageIndicator(
+                      controller: _controller,
+                      // PageController
+                      count: mebels.img!.length,
+                      effect: ExpandingDotsEffect(
+                        activeDotColor: Colors.black,
+                        dotColor: Colors.white,
+                        dotHeight: getHeight(6.0),
+                      ), // your preferred effect
+                      onDotClicked: (index) {}),
+                )
               ],
             ),
             Expanded(
