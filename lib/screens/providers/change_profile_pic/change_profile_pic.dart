@@ -13,6 +13,14 @@ class ChangeProfilePicture extends ChangeNotifier {
   String? profilePicLink =
       AuthProvider(FirebaseAuth.instance).fireBaseAuth.currentUser!.photoURL;
 
+  reloadPicLink() async {
+    profilePicLink = await AuthProvider(FirebaseAuth.instance)
+        .fireBaseAuth
+        .currentUser!
+        .photoURL;
+    notifyListeners();
+  }
+
   Future uploadPicture() async {
     final filePicker = await FilePicker.platform.pickFiles(
       allowMultiple: false,

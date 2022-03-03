@@ -19,6 +19,7 @@ class SignUpPage extends StatelessWidget {
   final TextEditingController _passwordConstroller = TextEditingController();
   final TextEditingController _confirmPasswordConstroller =
       TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -64,56 +65,66 @@ class SignUpPage extends StatelessWidget {
                     )
                   ],
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    EmailNameInput(
-                        constroller: _nameConstroller, hintText: "Name"),
-                    EmailNameInput(
-                        constroller: _emailConstroller, hintText: "Email"),
-                    PasswordInput(
-                        passwordConstroller: _passwordConstroller,
-                        hintText: "Password"),
-                    PasswordInput(
-                      passwordConstroller: _confirmPasswordConstroller,
-                      hintText: "Confirm Password",
-                    ),
-                    SizedBox(
-                      height: getHeight(50),
-                      width: getWidth(285),
-                      child: ElevatedButton(
-                        onPressed: () async {
-                          await _addUser(context);
-                        },
-                        child: const Text("SIGN UP"),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      EmailNameInput(
+                          constroller: _nameConstroller, hintText: "Name"),
+                      EmailNameInput(
+                          constroller: _emailConstroller, hintText: "Email"),
+                      PasswordInput(
+                          passwordConstroller: _passwordConstroller,
+                          hintText: "Password"),
+                      PasswordInput(
+                        passwordConstroller: _confirmPasswordConstroller,
+                        hintText: "Confirm Password",
                       ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Already have account?",
-                          style: TextStyle(
-                            fontSize: Constants.disTextSize,
-                            color: Constants.color80,
-                            fontWeight: Constants.semiBold,
-                          ),
+                      SizedBox(
+                        height: getHeight(50),
+                        width: getWidth(285),
+                        child: ElevatedButton(
+                          onPressed: () async {
+                            if (_passwordConstroller.text !=
+                                _confirmPasswordConstroller.text) {
+                              SnackBarWidget.show(
+                                  "Confirmation password is Incorrect",
+                                  context);
+                            } else {
+                              await _addUser(context);
+                            }
+                          },
+                          child: const Text("SIGN UP"),
                         ),
-                        TextButton(
-                          onPressed: () => Navigator.pop(context),
-                          child: Text(
-                            "Sign In",
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Already have account?",
                             style: TextStyle(
-                              fontWeight: Constants.bold,
                               fontSize: Constants.disTextSize,
-                              color: Constants.color30,
+                              color: Constants.color80,
+                              fontWeight: Constants.semiBold,
                             ),
                           ),
-                        ),
-                      ],
-                    )
-                  ],
+                          TextButton(
+                            onPressed: () => Navigator.pop(context),
+                            child: Text(
+                              "Sign In",
+                              style: TextStyle(
+                                fontWeight: Constants.bold,
+                                fontSize: Constants.disTextSize,
+                                color: Constants.color30,
+                              ),
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
                 ),
               )
             ],

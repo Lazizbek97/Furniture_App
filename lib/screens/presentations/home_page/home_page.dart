@@ -13,6 +13,7 @@ import 'package:provider/provider.dart';
 
 import '../../../core/models/furniture_model.dart';
 import '../../providers/cart_provider/cart_provider.dart';
+import '../../providers/change_profile_pic/change_profile_pic.dart';
 import '../../providers/home_page_provider/homepage_provider.dart';
 import 'components/item_card.dart';
 import 'components/menu_button.dart';
@@ -45,6 +46,7 @@ class _HomePageState extends State<HomePage> {
           showUnselectedLabels: false,
           currentIndex: _navbarIndex,
           onTap: (v) async {
+            await context.read<ChangeProfilePicture>().reloadPicLink();
             setState(() {
               _navbarIndex = v;
             });

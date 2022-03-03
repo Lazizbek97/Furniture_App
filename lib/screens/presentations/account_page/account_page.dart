@@ -25,6 +25,7 @@ class AccountPage extends StatelessWidget {
             //   context: context,
             //   delegate: SearchPage(),
             // );
+           
           },
           icon: SvgPicture.asset(
             Constants.searchImage,
@@ -73,12 +74,18 @@ class AccountPage extends StatelessWidget {
                           decoration: BoxDecoration(
                               image: DecorationImage(
                                 fit: BoxFit.cover,
-                                image: NetworkImage(
-                                  context
-                                      .watch<ChangeProfilePicture>()
-                                      .profilePicLink
-                                      .toString(),
-                                ),
+                                image: context
+                                            .watch<ChangeProfilePicture>()
+                                            .profilePicLink ==
+                                        null
+                                    ? NetworkImage(
+                                        "https://st.depositphotos.com/2101611/3925/v/600/depositphotos_39258143-stock-illustration-businessman-avatar-profile-picture.jpg")
+                                    : NetworkImage(
+                                        context
+                                            .watch<ChangeProfilePicture>()
+                                            .profilePicLink
+                                            .toString(),
+                                      ),
                               ),
                               borderRadius: BorderRadius.circular(50)),
                         ),

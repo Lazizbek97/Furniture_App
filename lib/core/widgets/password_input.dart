@@ -19,32 +19,46 @@ class PasswordInput extends StatefulWidget {
 }
 
 class _PasswordInputState extends State<PasswordInput> {
-  bool isVisible = false;
+  bool isVisible = true;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: widget._passwordConstroller,
       obscureText: isVisible,
+      cursorColor: Colors.black,
       decoration: InputDecoration(
-          labelText: widget._hintText,
-          labelStyle: TextStyle(
-            fontSize: Constants.disTextSize,
-            color: Constants.color90,
+        labelText: widget._hintText,
+        focusedBorder: UnderlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.black,
           ),
-          enabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(
-              color: Constants.inputBorderColor,
-            ),
+        ),
+        labelStyle: TextStyle(
+          fontSize: Constants.disTextSize,
+          color: Constants.color90,
+        ),
+        enabledBorder: UnderlineInputBorder(
+          borderSide: BorderSide(
+            color: Constants.inputBorderColor,
           ),
-          suffixIcon: InkWell(
-            onTap: () => setState(() {
-              isVisible != isVisible;
-            }),
-            child: isVisible
-                ? const Icon(Icons.remove_red_eye_outlined)
-                : const Icon(Icons.visibility_off_outlined),
-          )),
+        ),
+        suffixIcon: IconButton(
+          onPressed: () {
+            isVisible = !isVisible;
+            setState(() {});
+          },
+          icon: isVisible
+              ? const Icon(
+                  Icons.visibility_off_outlined,
+                  color: Colors.black,
+                )
+              : const Icon(
+                  Icons.remove_red_eye_outlined,
+                  color: Colors.black,
+                ),
+        ),
+      ),
     );
   }
 }

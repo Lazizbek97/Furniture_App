@@ -25,6 +25,11 @@ class EmailNameInput extends StatelessWidget {
           fontSize: Constants.disTextSize,
           color: Constants.color90,
         ),
+        focusedBorder: UnderlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.black,
+          ),
+        ),
         enabledBorder: UnderlineInputBorder(
           borderSide: BorderSide(
             color: Constants.inputBorderColor,
