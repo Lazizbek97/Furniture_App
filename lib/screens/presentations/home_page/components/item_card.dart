@@ -40,12 +40,15 @@ class ItemCard extends StatelessWidget {
                 flex: 8,
                 child: Stack(
                   children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: AssetImage(item.img![0].toString()),
+                    Hero(
+                      tag: "mebel${home.menuIndex}$index",
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image: AssetImage(item.img![0].toString()),
+                          ),
                         ),
                       ),
                     ),

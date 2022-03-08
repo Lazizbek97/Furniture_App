@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:furniture_app/core/utils/constants.dart';
 import 'package:furniture_app/core/utils/size_config.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
 import '../../providers/cart_provider/cart_provider.dart';
@@ -25,24 +26,12 @@ class PaymentCompleted extends StatelessWidget {
                   color: Constants.color30,
                 ),
               ),
-              Stack(
-                children: [
-                  const Center(
-                    child: Image(
-                      image: AssetImage("assets/images/success_back.png"),
-                    ),
-                  ),
-                  const Center(
-                    child: Image(
-                      image: AssetImage("assets/images/success_front.png"),
-                    ),
-                  ),
-                  Positioned(
-                    bottom: 0,
-                    left: getWidth(163),
-                    child: Image.asset("assets/images/checkmark.png"),
-                  ),
-                ],
+              Center(
+                child: SizedBox(
+                  height: getHeight(300),
+                  child: Lottie.network(
+                      "https://assets2.lottiefiles.com/packages/lf20_cr7qpwnj.json"),
+                ),
               ),
               SizedBox(
                 height: getHeight(54),

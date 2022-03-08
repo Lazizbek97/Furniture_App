@@ -55,13 +55,17 @@ class AboutPage extends StatelessWidget {
                     child: PageView.builder(
                       controller: _controller,
                       itemCount: mebels.img!.length,
-                      itemBuilder: ((context, index) => Container(
-                            decoration: BoxDecoration(
-                              borderRadius: const BorderRadius.only(
-                                  bottomLeft: Radius.circular(50)),
-                              image: DecorationImage(
-                                fit: BoxFit.cover,
-                                image: AssetImage(mebels.img![index].toString()),
+                      itemBuilder: ((context, i) => Hero(
+                            tag: "mebel${home.menuIndex}$index",
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: const BorderRadius.only(
+                                    bottomLeft: Radius.circular(50)),
+                                image: DecorationImage(
+                                  fit: BoxFit.cover,
+                                  image:
+                                      AssetImage(mebels.img![i].toString()),
+                                ),
                               ),
                             ),
                           )),
@@ -146,16 +150,18 @@ class AboutPage extends StatelessWidget {
                 Positioned(
                   bottom: getHeight(20),
                   right: getWidth(100),
-                  child:mebels.img!.length != 1? SmoothPageIndicator(
-                      controller: _controller,
-                      // PageController
-                      count: mebels.img!.length,
-                      effect: ExpandingDotsEffect(
-                        activeDotColor: Colors.black,
-                        dotColor: Colors.white,
-                        dotHeight: getHeight(6.0),
-                      ), // your preferred effect
-                      onDotClicked: (index) {}):Text(""),
+                  child: mebels.img!.length != 1
+                      ? SmoothPageIndicator(
+                          controller: _controller,
+                          // PageController
+                          count: mebels.img!.length,
+                          effect: ExpandingDotsEffect(
+                            activeDotColor: Colors.black,
+                            dotColor: Colors.white,
+                            dotHeight: getHeight(6.0),
+                          ), // your preferred effect
+                          onDotClicked: (index) {})
+                      : Text(""),
                 )
               ],
             ),
